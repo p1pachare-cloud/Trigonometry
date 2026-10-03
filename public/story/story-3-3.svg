@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="parchmentBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <radialGradient id="tableLight" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.15"/>
+      <stop offset="60%" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="675" fill="url(#parchmentBg)"/>
+  <rect width="1200" height="675" fill="url(#tableLight)"/>
+
+  <!-- Drafting Grid lines -->
+  <g stroke="#334155" stroke-width="0.75" stroke-dasharray="4 4" opacity="0.4">
+    <line x1="100" y1="0" x2="100" y2="675"/><line x1="200" y1="0" x2="200" y2="675"/>
+    <line x1="300" y1="0" x2="300" y2="675"/><line x1="400" y1="0" x2="400" y2="675"/>
+    <line x1="500" y1="0" x2="500" y2="675"/><line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="700" y1="0" x2="700" y2="675"/><line x1="800" y1="0" x2="800" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/><line x1="1000" y1="0" x2="1000" y2="675"/>
+    <line x1="1100" y1="0" x2="1100" y2="675"/>
+    <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/><line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+
+  <!-- Large Oblique Triangle ABC -->
+  <!-- A: (220, 480) | B: (980, 480) | C: (580, 160) -->
+  <!-- Left Right-Triangle Shade -->
+  <polygon points="220,480 580,160 580,480" fill="#10b981" fill-opacity="0.12"/>
+  <!-- Right Right-Triangle Shade -->
+  <polygon points="580,480 580,160 980,480" fill="#38bdf8" fill-opacity="0.12"/>
+
+  <!-- Triangle Outer Edges -->
+  <!-- Side b (AC) -->
+  <line x1="220" y1="480" x2="580" y2="160" stroke="#10b981" stroke-width="4.5" stroke-linecap="round" filter="url(#glowGreen)"/>
+  <!-- Side a (BC) -->
+  <line x1="580" y1="160" x2="980" y2="480" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Base Side c (AB) -->
+  <line x1="220" y1="480" x2="980" y2="480" stroke="#fbbf24" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- The Key Altitude Split Line (h) from (580, 160) to (580, 480) -->
+  <line x1="580" y1="160" x2="580" y2="480" stroke="#f43f5e" stroke-width="4" stroke-dasharray="10 8" filter="url(#glowGreen)"/>
+
+  <!-- Right Angle Square at Foot D (580, 480) -->
+  <rect x="555" y="455" width="25" height="25" fill="none" stroke="#f43f5e" stroke-width="2.5"/>
+  <rect x="580" y="455" width="25" height="25" fill="none" stroke="#f43f5e" stroke-width="2.5"/>
+
+  <!-- Altitude Label -->
+  <rect x="530" y="300" width="100" height="36" rx="8" fill="#0f172a" stroke="#f43f5e" stroke-width="2"/>
+  <text x="580" y="325" fill="#f43f5e" font-family="'Outfit', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">
+    Altitude h
+  </text>
+
+  <!-- Vertices Circles & Labels -->
+  <!-- Vertex A -->
+  <circle cx="220" cy="480" r="14" fill="#10b981" stroke="#ffffff" stroke-width="3"/>
+  <text x="175" y="490" fill="#10b981" font-family="'Outfit', sans-serif" font-size="28" font-weight="900">A</text>
+  <!-- Angle A Arc -->
+  <path d="M 280 480 A 60 60 0 0 0 260 440" fill="none" stroke="#10b981" stroke-width="3"/>
+  <text x="290" y="450" fill="#10b981" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold">θA</text>
+
+  <!-- Vertex B -->
+  <circle cx="980" cy="480" r="14" fill="#38bdf8" stroke="#ffffff" stroke-width="3"/>
+  <text x="1010" y="490" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="28" font-weight="900">B</text>
+  <!-- Angle B Arc -->
+  <path d="M 920 480 A 60 60 0 0 1 945 445" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <text x="900" y="450" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold">θB</text>
+
+  <!-- Vertex C (Apex) -->
+  <circle cx="580" cy="160" r="14" fill="#f43f5e" stroke="#ffffff" stroke-width="3"/>
+  <text x="580" y="125" fill="#f43f5e" font-family="'Outfit', sans-serif" font-size="28" font-weight="900" text-anchor="middle">C</text>
+
+  <!-- Side Labels -->
+  <text x="350" y="300" fill="#10b981" font-family="'Outfit', sans-serif" font-size="24" font-weight="bold">Side b</text>
+  <text x="810" y="300" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="24" font-weight="bold">Side a</text>
+  <text x="580" y="520" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Base Side c</text>
+
+  <!-- Mathematical Derivation Boxes -->
+  <!-- Left Side: From Triangle ACD -->
+  <g transform="translate(60, 180)">
+    <rect width="260" height="90" rx="12" fill="#0f172a" fill-opacity="0.92" stroke="#10b981" stroke-width="2"/>
+    <text x="130" y="30" fill="#a7f3d0" font-family="'Outfit', sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FROM LEFT TRIANGLE:</text>
+    <text x="130" y="55" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">sin A = h / b</text>
+    <text x="130" y="78" fill="#10b981" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">➔  h = b · sin A</text>
+  </g>
+
+  <!-- Right Side: From Triangle BCD -->
+  <g transform="translate(880, 180)">
+    <rect width="260" height="90" rx="12" fill="#0f172a" fill-opacity="0.92" stroke="#38bdf8" stroke-width="2"/>
+    <text x="130" y="30" fill="#bae6fd" font-family="'Outfit', sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FROM RIGHT TRIANGLE:</text>
+    <text x="130" y="55" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">sin B = h / a</text>
+    <text x="130" y="78" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">➔  h = a · sin B</text>
+  </g>
+
+  <!-- Bottom Grand Equalization Card: The Law of Sines -->
+  <g transform="translate(250, 560)">
+    <rect width="700" height="95" rx="18" fill="#0f172a" fill-opacity="0.95" stroke="#fbbf24" stroke-width="2.5"/>
+    <text x="350" y="35" fill="#fef08a" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      EQUATING SHARED HEIGHT h:  b · sin A = a · sin B
+    </text>
+    <text x="350" y="72" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="28" font-weight="900" text-anchor="middle">
+      ⭐ <tspan fill="#38bdf8">a / sin A</tspan> = <tspan fill="#10b981">b / sin B</tspan> = <tspan fill="#fbbf24">c / sin C</tspan> (The Law of Sines)
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="auroraSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#051329"/>
+      <stop offset="40%" stop-color="#0a2540"/>
+      <stop offset="80%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="auroraRibbon1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#10b981" stop-opacity="0.35"/>
+      <stop offset="70%" stop-color="#34d399" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="auroraRibbon2" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#f43f5e" stop-opacity="0.35"/>
+      <stop offset="80%" stop-color="#fbbf24" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#fb7185" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="auroraGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Sky Canvas -->
+  <rect width="1200" height="675" fill="url(#auroraSky)"/>
+
+  <!-- Swirling Aurora Borealis ribbons -->
+  <path d="M 0 160 Q 300 80, 600 180 T 1200 120 L 1200 0 L 0 0 Z" fill="url(#auroraRibbon1)" filter="url(#auroraGlow)"/>
+  <path d="M 0 240 Q 400 140, 800 220 T 1200 170 L 1200 0 L 0 0 Z" fill="url(#auroraRibbon2)" filter="url(#auroraGlow)"/>
+
+  <!-- Stars and Constellations -->
+  <g fill="#ffffff">
+    <circle cx="120" cy="80" r="1.5" opacity="0.8"/>
+    <circle cx="210" cy="140" r="2" opacity="0.9"/>
+    <circle cx="340" cy="60" r="1" opacity="0.6"/>
+    <circle cx="480" cy="110" r="2.5" opacity="0.95"/>
+    <circle cx="620" cy="50" r="1.8" opacity="0.8"/>
+    <circle cx="780" cy="130" r="2" opacity="0.9"/>
+    <circle cx="890" cy="70" r="1.5" opacity="0.7"/>
+    <circle cx="1020" cy="120" r="2.2" opacity="0.85"/>
+    <circle cx="1130" cy="60" r="1.5" opacity="0.7"/>
+  </g>
+
+  <!-- Giant Holographic Celestial Constellation Sphere in Sky -->
+  <circle cx="600" cy="220" r="130" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+  <ellipse cx="600" cy="220" rx="130" ry="40" fill="none" stroke="#10b981" stroke-width="1.2" opacity="0.45"/>
+  <!-- Celestial Triangle inside sphere -->
+  <polygon points="540,160 680,210 590,310" fill="none" stroke="#fbbf24" stroke-width="2.5" filter="url(#goldGlow)"/>
+
+  <!-- High-Tech Observation Bridge Platform -->
+  <path d="M 0 460 Q 600 420 1200 460 L 1200 675 L 0 675 Z" fill="#0b1329"/>
+  <!-- Glass Railing with Glowing Stanchions -->
+  <path d="M 0 420 Q 600 380 1200 420" stroke="#10b981" stroke-width="3" fill="none" filter="url(#goldGlow)"/>
+  <line x1="150" y1="455" x2="150" y2="415" stroke="#334155" stroke-width="3"/>
+  <line x1="300" y1="445" x2="300" y2="405" stroke="#334155" stroke-width="3"/>
+  <line x1="450" y1="438" x2="450" y2="398" stroke="#334155" stroke-width="3"/>
+  <line x1="750" y1="438" x2="750" y2="398" stroke="#334155" stroke-width="3"/>
+  <line x1="900" y1="445" x2="900" y2="405" stroke="#334155" stroke-width="3"/>
+  <line x1="1050" y1="455" x2="1050" y2="415" stroke="#334155" stroke-width="3"/>
+
+  <!-- Large Telescope Station in Center -->
+  <g transform="translate(560, 310)">
+    <!-- Tripod -->
+    <line x1="40" y1="80" x2="10" y2="130" stroke="#475569" stroke-width="6"/>
+    <line x1="40" y1="80" x2="70" y2="130" stroke="#475569" stroke-width="6"/>
+    <line x1="40" y1="80" x2="40" y2="135" stroke="#334155" stroke-width="6"/>
+    <!-- Brass Telescope Tube pointed up at 45 deg -->
+    <line x1="15" y1="105" x2="95" y2="25" stroke="#fbbf24" stroke-width="14" stroke-linecap="round" filter="url(#goldGlow)"/>
+    <circle cx="95" cy="25" r="10" fill="#38bdf8" filter="url(#goldGlow)"/>
+  </g>
+
+  <!-- CHARACTERS SILHOUETTES / STYLIZED PROFILES ON BRIDGE -->
+
+  <!-- Theo the Owl in Center Left (600 - 80) -->
+  <g transform="translate(470, 335)">
+    <!-- Body -->
+    <ellipse cx="40" cy="55" rx="30" ry="38" fill="#d97706" stroke="#fbbf24" stroke-width="2"/>
+    <!-- Head -->
+    <circle cx="40" cy="25" r="24" fill="#b45309"/>
+    <!-- Little Hat -->
+    <rect x="28" y="2" width="24" height="12" fill="#0f172a"/>
+    <line x1="22" y1="14" x2="58" y2="14" stroke="#fbbf24" stroke-width="2"/>
+    <!-- Spectacles -->
+    <circle cx="32" cy="24" r="8" fill="none" stroke="#fef08a" stroke-width="2"/>
+    <circle cx="48" cy="24" r="8" fill="none" stroke="#fef08a" stroke-width="2"/>
+    <!-- Wing holding golden surveyor staff -->
+    <line x1="58" y1="45" x2="75" y2="8" stroke="#fbbf24" stroke-width="4" filter="url(#goldGlow)"/>
+    <circle cx="75" cy="8" r="6" fill="#10b981"/>
+  </g>
+
+  <!-- Apprentice 1 (Kofi) on Left with Clinometer -->
+  <g transform="translate(320, 320)">
+    <circle cx="25" cy="20" r="15" fill="#f59e0b"/>
+    <path d="M 10 38 L 40 38 L 36 90 L 14 90 Z" fill="#b45309"/>
+    <line x1="40" y1="45" x2="60" y2="30" stroke="#f59e0b" stroke-width="4"/>
+  </g>
+
+  <!-- Apprentice 2 (Ira) on Far Left with Notebook -->
+  <g transform="translate(190, 330)">
+    <circle cx="25" cy="20" r="14" fill="#38bdf8"/>
+    <path d="M 12 36 L 38 36 L 34 85 L 16 85 Z" fill="#0284c7"/>
+    <rect x="36" y="45" width="16" height="22" rx="3" fill="#f8fafc"/>
+  </g>
+
+  <!-- Apprentice 3 (Mei) Center Right with Chart -->
+  <g transform="translate(680, 330)">
+    <circle cx="25" cy="20" r="14" fill="#34d399"/>
+    <path d="M 12 36 L 38 36 L 34 85 L 16 85 Z" fill="#059669"/>
+    <line x1="38" y1="45" x2="55" y2="35" stroke="#34d399" stroke-width="4"/>
+  </g>
+
+  <!-- Apprentice 4 (Mateo) Far Right with Astrolabe -->
+  <g transform="translate(810, 320)">
+    <circle cx="25" cy="20" r="15" fill="#f43f5e"/>
+    <path d="M 10 38 L 40 38 L 36 90 L 14 90 Z" fill="#e11d48"/>
+    <circle cx="55" cy="40" r="10" fill="none" stroke="#fbbf24" stroke-width="2"/>
+  </g>
+
+  <!-- Bottom Grand Commission Banner -->
+  <g transform="translate(200, 520)">
+    <rect width="800" height="120" rx="20" fill="#0f172a" fill-opacity="0.95" stroke="#10b981" stroke-width="3" filter="url(#goldGlow)"/>
+    <text x="400" y="40" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="20" font-weight="900" text-anchor="middle" letter-spacing="2">
+      🌟 THE MASTER SURVEYOR COMMISSION 🌟
+    </text>
+    <text x="400" y="74" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="24" font-weight="bold" text-anchor="middle">
+      "You have mastered shadows and conquered the circle. Now build the world!"
+    </text>
+    <text x="400" y="102" fill="#34d399" font-family="'Outfit', sans-serif" font-size="16" font-weight="600" text-anchor="middle">
+      Level 1: Shadows &amp; Ratios • Level 2: Circle &amp; Coordinates • Level 3: Non-Right Triangles &amp; Waves
+    </text>
+  </g>
+</svg>

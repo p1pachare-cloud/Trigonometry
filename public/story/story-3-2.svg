@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="fogSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a192f"/>
+      <stop offset="50%" stop-color="#1b2a47"/>
+      <stop offset="85%" stop-color="#2d3748"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#132338"/>
+      <stop offset="100%" stop-color="#09131f"/>
+    </linearGradient>
+    <radialGradient id="lighthouseBeam1" cx="0%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.9"/>
+      <stop offset="30%" stop-color="#fbbf24" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lighthouseBeam2" cx="100%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fogLayer" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1200" height="480" fill="url(#fogSky)"/>
+  
+  <!-- Stars in upper sky -->
+  <circle cx="150" cy="80" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="280" cy="50" r="2" fill="#ffffff" opacity="0.8"/>
+  <circle cx="450" cy="90" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="720" cy="60" r="1.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="890" cy="110" r="2" fill="#ffffff" opacity="0.9"/>
+  <circle cx="1040" cy="70" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="610" cy="40" r="2.5" fill="#fef08a" opacity="0.85"/>
+
+  <!-- Distant misty islands -->
+  <path d="M0 380 Q 200 340 450 370 Q 700 390 900 360 Q 1100 340 1200 380 L 1200 480 L 0 480 Z" fill="#142132" opacity="0.7"/>
+
+  <!-- Ocean -->
+  <rect y="420" width="1200" height="255" fill="url(#oceanGrad)"/>
+
+  <!-- Water reflection ripples -->
+  <ellipse cx="600" cy="480" rx="300" ry="8" fill="#38bdf8" opacity="0.08"/>
+  <ellipse cx="580" cy="520" rx="240" ry="6" fill="#fbbf24" opacity="0.07"/>
+  <ellipse cx="620" cy="570" rx="180" ry="5" fill="#38bdf8" opacity="0.06"/>
+
+  <!-- Left Lighthouse Cliff (Point A) -->
+  <polygon points="0,280 180,310 220,490 0,510" fill="#0f172a"/>
+  <!-- Left Lighthouse Tower -->
+  <rect x="90" y="160" width="36" height="130" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+  <polygon points="80,160 136,160 108,125" fill="#dc2626"/>
+  <circle cx="108" cy="150" r="12" fill="#fef08a" filter="url(#glow)"/>
+  <!-- Left Light Beam hitting ship -->
+  <polygon points="108,150 560,450 580,480" fill="url(#lighthouseBeam1)" opacity="0.45"/>
+
+  <!-- Right Lighthouse Cliff (Point B) -->
+  <polygon points="1200,270 1010,310 970,490 1200,510" fill="#0f172a"/>
+  <!-- Right Lighthouse Tower -->
+  <rect x="1065" y="150" width="38" height="140" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+  <polygon points="1055,150 1113,150 1084,115" fill="#2563eb"/>
+  <circle cx="1084" cy="140" r="12" fill="#7dd3fc" filter="url(#glow)"/>
+  <!-- Right Light Beam hitting ship -->
+  <polygon points="1084,140 600,450 620,480" fill="url(#lighthouseBeam2)" opacity="0.45"/>
+
+  <!-- Central Sailing Ship (Point C) -->
+  <g transform="translate(520, 390)">
+    <!-- Hull -->
+    <path d="M 20 70 L 140 70 Q 160 70 170 55 L 180 55 L 165 85 Q 150 95 90 95 Q 30 95 10 80 Z" fill="#78350f" stroke="#451a03" stroke-width="2"/>
+    <!-- Masts -->
+    <line x1="60" y1="20" x2="60" y2="70" stroke="#d97706" stroke-width="4"/>
+    <line x1="110" y1="10" x2="110" y2="70" stroke="#d97706" stroke-width="4.5"/>
+    <!-- Sails (Slightly billowing in wind) -->
+    <path d="M 60 25 Q 90 35 60 55 Q 85 45 60 65 Z" fill="#f8fafc" opacity="0.9"/>
+    <path d="M 110 15 Q 145 28 110 45 Q 140 40 110 65 Z" fill="#f8fafc" opacity="0.95"/>
+    <circle cx="110" cy="50" r="6" fill="#f59e0b" filter="url(#glow)"/>
+  </g>
+
+  <!-- Glowing Oblique Triangle Geometry Overlay -->
+  <!-- A: (108, 150) | B: (1084, 140) | C: (610, 440) -->
+  <!-- Baseline AB -->
+  <line x1="108" y1="150" x2="1084" y2="140" stroke="#10b981" stroke-width="3" stroke-dasharray="8 6" filter="url(#glow)"/>
+  <!-- Side AC (b) -->
+  <line x1="108" y1="150" x2="610" y2="440" stroke="#fbbf24" stroke-width="3.5" filter="url(#glow)"/>
+  <!-- Side BC (a) -->
+  <line x1="1084" y1="140" x2="610" y2="440" stroke="#38bdf8" stroke-width="3.5" filter="url(#glow)"/>
+
+  <!-- Angle Arcs -->
+  <!-- Angle A -->
+  <path d="M 170 170 A 50 50 0 0 1 150 200" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+  <text x="175" y="210" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="20" font-weight="bold">Angle A</text>
+
+  <!-- Angle B -->
+  <path d="M 1020 160 A 50 50 0 0 0 1040 195" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+  <text x="960" y="210" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="20" font-weight="bold">Angle B</text>
+
+  <!-- Angle C (Ship) -->
+  <path d="M 590 410 A 40 40 0 0 1 630 410" fill="none" stroke="#f43f5e" stroke-width="3"/>
+  <text x="575" y="380" fill="#f43f5e" font-family="'Outfit', sans-serif" font-size="22" font-weight="bold">Angle C (Oblique)</text>
+
+  <!-- Side Labels -->
+  <text x="560" y="125" fill="#10b981" font-family="'Outfit', sans-serif" font-size="22" font-weight="bold">Known Baseline c = 12 km</text>
+  <text x="310" y="330" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="22" font-weight="bold">Side b = ?</text>
+  <text x="860" y="330" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="22" font-weight="bold">Side a = ?</text>
+
+  <!-- Fog ribbons -->
+  <rect x="0" y="350" width="1200" height="90" fill="url(#fogLayer)"/>
+  <rect x="0" y="440" width="1200" height="70" fill="url(#fogLayer)" opacity="0.6"/>
+
+  <!-- Educational Banner Card -->
+  <g transform="translate(300, 580)">
+    <rect width="600" height="75" rx="16" fill="#0f172a" fill-opacity="0.88" stroke="#10b981" stroke-width="1.5"/>
+    <text x="300" y="32" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">
+      🧭 The Oblique Challenge: No Right (90°) Angle Exists!
+    </text>
+    <text x="300" y="58" fill="#34d399" font-family="'Outfit', sans-serif" font-size="15" text-anchor="middle">
+      Right-triangle SOH-CAH-TOA alone cannot solve this navigation triangle.
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="engWorkshopBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="60%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#090d16"/>
+    </linearGradient>
+    <filter id="glowBlue" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#engWorkshopBg)"/>
+
+  <!-- Technical Blueprint Circles & Grid -->
+  <g stroke="#334155" stroke-width="0.8" opacity="0.35">
+    <circle cx="600" cy="300" r="180" fill="none" stroke-dasharray="6 6"/>
+    <circle cx="600" cy="300" r="280" fill="none" stroke-dasharray="8 8"/>
+    <line x1="100" y1="300" x2="1100" y2="300"/>
+    <line x1="600" y1="50" x2="600" y2="550"/>
+  </g>
+
+  <!-- Three Angle Scenarios Displayed Side by Side -->
+
+  <!-- 1. ACUTE (C &lt; 90°) Left Column -->
+  <g transform="translate(100, 140)">
+    <rect width="280" height="340" rx="16" fill="#1e293b" fill-opacity="0.85" stroke="#38bdf8" stroke-width="2"/>
+    <text x="140" y="36" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">
+      1. ACUTE ANGLE (C &lt; 90°)
+    </text>
+    <!-- Acute Triangle -->
+    <path d="M 60 220 L 220 220 L 130 110 Z" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="3"/>
+    <!-- Angle C arc -->
+    <path d="M 120 125 A 25 25 0 0 0 145 125" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="140" y="88" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="15" font-weight="bold" text-anchor="middle">C &lt; 90°</text>
+    <text x="140" y="250" fill="#94a3b8" font-family="'Outfit', sans-serif" font-size="14" text-anchor="middle">cos C &gt; 0 (Positive)</text>
+    <text x="140" y="280" fill="#38bdf8" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      - 2ab cos C is NEGATIVE
+    </text>
+    <text x="140" y="315" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      c² &lt; a² + b² (Shrinks side c)
+    </text>
+  </g>
+
+  <!-- 2. RIGHT (C = 90°) Center Column -->
+  <g transform="translate(460, 130)">
+    <rect width="280" height="360" rx="16" fill="#1e293b" fill-opacity="0.95" stroke="#10b981" stroke-width="3" filter="url(#glowBlue)"/>
+    <rect x="20" y="-12" width="240" height="26" rx="8" fill="#10b981"/>
+    <text x="140" y="6" fill="#042f2e" font-family="'Outfit', sans-serif" font-size="14" font-weight="900" text-anchor="middle">
+      CLASSICAL PYTHAGORAS
+    </text>
+    <text x="140" y="44" fill="#34d399" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">
+      2. RIGHT ANGLE (C = 90°)
+    </text>
+    <!-- Right Triangle -->
+    <path d="M 50 230 L 220 230 L 50 110 Z" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="3.5"/>
+    <rect x="50" y="205" width="25" height="25" fill="none" stroke="#10b981" stroke-width="2"/>
+    <text x="140" y="90" fill="#fef08a" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">C = 90°</text>
+    <text x="140" y="260" fill="#94a3b8" font-family="'Outfit', sans-serif" font-size="14" text-anchor="middle">cos 90° = 0 (Zero)</text>
+    <text x="140" y="290" fill="#34d399" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      - 2ab(0) = 0 (Vanishes!)
+    </text>
+    <text x="140" y="330" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">
+      c² = a² + b² (Exact)
+    </text>
+  </g>
+
+  <!-- 3. OBTUSE (C &gt; 90°) Right Column -->
+  <g transform="translate(820, 140)">
+    <rect width="280" height="340" rx="16" fill="#1e293b" fill-opacity="0.85" stroke="#f43f5e" stroke-width="2"/>
+    <text x="140" y="36" fill="#f43f5e" font-family="'Outfit', sans-serif" font-size="18" font-weight="bold" text-anchor="middle">
+      3. OBTUSE ANGLE (C &gt; 90°)
+    </text>
+    <!-- Obtuse Triangle -->
+    <path d="M 30 220 L 250 220 L 70 140 Z" fill="#f43f5e" fill-opacity="0.15" stroke="#f43f5e" stroke-width="3"/>
+    <!-- Angle C arc wide -->
+    <path d="M 50 160 A 35 35 0 0 0 100 165" fill="none" stroke="#fbbf24" stroke-width="2"/>
+    <text x="140" y="100" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="15" font-weight="bold" text-anchor="middle">C &gt; 90° (Wide)</text>
+    <text x="140" y="250" fill="#94a3b8" font-family="'Outfit', sans-serif" font-size="14" text-anchor="middle">cos C &lt; 0 (Negative)</text>
+    <text x="140" y="280" fill="#f43f5e" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      - 2ab(-cos) is POSITIVE!
+    </text>
+    <text x="140" y="315" fill="#f8fafc" font-family="'Outfit', sans-serif" font-size="16" font-weight="bold" text-anchor="middle">
+      c² &gt; a² + b² (Stretches c!)
+    </text>
+  </g>
+
+  <!-- Grand Formula Banner at the Bottom -->
+  <g transform="translate(180, 530)">
+    <rect width="840" height="115" rx="20" fill="#0f172a" fill-opacity="0.95" stroke="#10b981" stroke-width="2.5"/>
+    <text x="420" y="35" fill="#a7f3d0" font-family="'Outfit', sans-serif" font-size="17" font-weight="bold" text-anchor="middle">
+      THE GENERALIZED MASTER FORMULA: THE LAW OF COSINES
+    </text>
+    <text x="420" y="78" fill="#ffffff" font-family="'Outfit', sans-serif" font-size="30" font-weight="900" text-anchor="middle">
+      c² = <tspan fill="#38bdf8">a² + b²</tspan> <tspan fill="#f43f5e">- 2ab cos C</tspan>
+    </text>
+    <text x="420" y="102" fill="#fbbf24" font-family="'Outfit', sans-serif" font-size="14" text-anchor="middle">
+      (Pythagorean Base)                   (Smooth Dynamic Correction Term)
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,91 @@
+// src/content/vault.ts
+import type { SpeedTrick } from './types';
+
+export const SPEED_TRICKS: Record<string, SpeedTrick> = {
+  T1: {
+    id: 'T1',
+    title: 'SOH-CAH-TOA Memory Mnemonic',
+    unlocksSkill: 'E2',
+    technique: '"Some Old Horses Can Always Hear Their Owners Approach". SOH: Sin = Opp/Hyp; CAH: Cos = Adj/Hyp; TOA: Tan = Opp/Adj.',
+    whyItWorks: 'Anchors the three fundamental ratios to memorable real-world words.',
+  },
+  T2: {
+    id: 'T2',
+    title: 'The Cover-Up Triangle',
+    unlocksSkill: 'E5',
+    technique: 'Draw a triangle with the numerator on top and the function and denominator on the bottom. Cover the unknown: side-by-side means multiply; stacked means divide.',
+    whyItWorks: 'Algebraic transposition made visual: unknown on top requires multiplication; unknown on bottom requires division.',
+  },
+  T3: {
+    id: 'T3',
+    title: 'The Root Ladder Pattern',
+    unlocksSkill: 'E4',
+    technique: 'sin(0°, 30°, 45°, 60°, 90°) = √(0)/2, √(1)/2, √(2)/2, √(3)/2, √(4)/2. Cosine is the exact same list in reverse!',
+    whyItWorks: 'Derives directly from the geometric symmetry of half-equilaterals and unit squares.',
+  },
+  T4: {
+    id: 'T4',
+    title: 'Complementary Angle Flip',
+    unlocksSkill: 'E7',
+    technique: 'If two angles sum to 90°, sin of one equals cos of the other! (E.g., sin 25° = cos 65°).',
+    whyItWorks: 'The side opposite one acute angle in a right triangle is identically the adjacent side to the other acute angle.',
+  },
+  T5: {
+    id: 'T5',
+    title: 'ASTC Quadrant Compass',
+    unlocksSkill: 'M7',
+    technique: '"All Students Take Calculus": Q1 All positive, Q2 Sin positive, Q3 Tan positive, Q4 Cos positive.',
+    whyItWorks: 'Corresponds directly to the signs of Cartesian coordinates (x, y) on the Unit Circle.',
+  },
+  T6: {
+    id: 'T6',
+    title: 'Pythagorean Triple Radar',
+    unlocksSkill: 'E9',
+    technique: 'Instantly recognize (3, 4, 5), (5, 12, 13), (8, 15, 17), (7, 24, 25) and any scaled multiple k*(a, b, c).',
+    whyItWorks: 'Integer solutions to a² + b² = c² allow bypassing square roots in milliseconds.',
+  },
+  T7: {
+    id: 'T7',
+    title: 'Replace π with 180°',
+    unlocksSkill: 'M10',
+    technique: 'To convert radians with π to degrees, simply replace π with 180! E.g., 5π/6 = 5(180)/6 = 150°.',
+    whyItWorks: 'Because a straight angle has an arc length equal to π radii, π radians is identically 180°.',
+  },
+  T9: {
+    id: 'T9',
+    title: 'Doubled Triples for Double Angles',
+    unlocksSkill: 'H3',
+    technique: 'If sin A = 3/5 in a (3, 4, 5) triangle, the double angle creates triple (7, 24, 25): sin 2A = 24/25, cos 2A = 7/25.',
+    whyItWorks: 'Direct result of sin 2A = 2 sin A cos A and cos 2A = cos²A - sin²A.',
+  },
+  T10: {
+    id: 'T10',
+    title: "Bhāskara I's Rational Sine Approximation",
+    unlocksSkill: 'H12',
+    technique: 'sin(θ°) ≈ 4θ(180 - θ) / (40500 - θ(180 - θ)).',
+    whyItWorks: 'A 7th-century Indian rational approximation accurate to within 1.9% for all angles from 0° to 180°.',
+  },
+  T11: {
+    id: 'T11',
+    title: 'Surd Rationalization at a Glance',
+    unlocksSkill: 'M5',
+    technique: '1/√n = √n / n. For two terms: 1/(√a + √b) = (√a - √b)/(a - b).',
+    whyItWorks: 'Multiplies by the conjugate to exploit the algebraic difference of squares (x - y)(x + y) = x² - y².',
+  },
+  V1: {
+    id: 'V1',
+    title: 'Vedic: Fast Squaring of Numbers Ending in 5',
+    unlocksSkill: 'E0',
+    technique: 'To square n5: multiply n by (n + 1), then append 25. E.g., 75²: 7 × 8 = 56, append 25 → 5625!',
+    whyItWorks: '(10n + 5)² = 100n² + 100n + 25 = 100n(n + 1) + 25.',
+    isVedic: true,
+  },
+  V2: {
+    id: 'V2',
+    title: 'Vedic: Fast Squaring Near Base 100',
+    unlocksSkill: 'E0',
+    technique: 'To square 98 (deficit 2 from 100): 98 - 2 = 96, then append 2² (04) → 9604!',
+    whyItWorks: '(B - d)² = B(B - 2d) + d².',
+    isVedic: true,
+  },
+};

@@ -1,0 +1,289 @@
+/* src/index.css - Sky Surveyors Mint + Coral Visual Styles */
+@import './theme/tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  background: var(--bg-page);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Eye-Friendly Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #A7F3D0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mint-primary);
+}
+
+/* Modern Content Cards */
+.trig-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.05), 0 2px 5px rgba(22, 53, 42, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.trig-card:hover {
+  border-color: #A4DCC1;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.09), 0 3px 8px rgba(22, 53, 42, 0.06);
+}
+
+/* Button Design System */
+.trig-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+  user-select: none;
+  position: relative;
+}
+
+.trig-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Primary Button (Mint #10B981) */
+.trig-btn-primary {
+  background: var(--color-mint-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 0 var(--color-mint-dark), 0 4px 12px var(--color-mint-glow);
+}
+.trig-btn-primary:hover {
+  background: #0ea372;
+  box-shadow: 0 4px 0 var(--color-mint-dark), 0 6px 16px var(--color-mint-glow);
+}
+.trig-btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-mint-dark);
+}
+
+/* Secondary Button (Coral #FF6B6B) */
+.trig-btn-coral,
+.trig-btn-secondary-action {
+  background: var(--color-coral-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 0 var(--color-coral-dark), 0 4px 12px var(--color-coral-glow);
+}
+.trig-btn-coral:hover,
+.trig-btn-secondary-action:hover {
+  background: #f85b5b;
+  box-shadow: 0 4px 0 var(--color-coral-dark), 0 6px 16px var(--color-coral-glow);
+}
+.trig-btn-coral:active,
+.trig-btn-secondary-action:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-coral-dark);
+}
+
+/* Ghost / Neutral Button (White card + Mint hover) */
+.trig-btn-secondary {
+  background: #ffffff;
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 3px 0 rgba(196, 227, 211, 0.9);
+}
+.trig-btn-secondary:hover {
+  background: var(--color-mint-soft);
+  border-color: #A7F3D0;
+  color: var(--color-mint-dark);
+}
+.trig-btn-secondary:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(196, 227, 211, 0.9);
+}
+
+/* Reward Button (Yellow #FBBF24 + Dark Text #16352A) */
+.trig-btn-gold {
+  background: var(--color-reward-yellow);
+  color: var(--text-main);
+  font-weight: 800;
+  box-shadow: 0 4px 0 var(--color-reward-dark), 0 4px 12px var(--color-reward-glow);
+}
+.trig-btn-gold:hover {
+  background: #F59E0B;
+  box-shadow: 0 4px 0 var(--color-reward-dark), 0 6px 16px var(--color-reward-glow);
+}
+.trig-btn-gold:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-reward-dark);
+}
+
+/* Navigation Tab Item */
+.trig-nav-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  color: var(--nav-inactive);
+  transition: all 0.18s ease;
+}
+.trig-nav-tab:hover {
+  background: var(--nav-hover-bg);
+  color: var(--nav-active);
+}
+.trig-nav-tab.active {
+  background: var(--nav-active-bg);
+  color: var(--nav-active);
+  font-weight: 800;
+  border-color: #A7F3D0;
+}
+
+/* Accessible Focus Ring */
+button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--color-mint-primary);
+  outline-offset: 2px;
+}
+
+/* Progress Bars */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--progress-track);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--progress-bar);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+.progress-fill-completed {
+  background: var(--progress-completed);
+}
+.progress-fill-milestone {
+  background: var(--progress-milestone);
+}
+
+/* Geometry Side Pills */
+.side-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+.side-pill-hyp {
+  background: var(--color-side-hyp-glow);
+  color: var(--color-side-hyp);
+  border: 1.5px dotted var(--color-side-hyp);
+}
+.side-pill-opp {
+  background: var(--color-coral-light);
+  color: var(--color-coral-dark);
+  border: 1.5px dashed var(--color-coral-primary);
+}
+.side-pill-adj {
+  background: var(--color-mint-light);
+  color: var(--color-mint-dark);
+  border: 1.5px solid var(--color-mint-primary);
+}
+
+/* Reward Badge */
+.reward-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-reward-light);
+  color: #92400E;
+  border: 1.5px solid #FCD34D;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* Interactive Animations */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes floatBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.8s infinite ease-in-out;
+}
+.float-bob {
+  animation: floatBob 3.6s infinite ease-in-out;
+}
+
+/* KaTeX Math Expression Overflow Guard */
+.katex-wrap {
+  max-width: 100%;
+}
+.katex-block {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+  text-align: center;
+  scrollbar-width: thin;
+}
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  margin: 0.4em 0 !important;
+  text-align: center;
+  scrollbar-width: thin;
+}
+.katex-display > .katex {
+  max-width: 100%;
+  text-align: center;
+}
+

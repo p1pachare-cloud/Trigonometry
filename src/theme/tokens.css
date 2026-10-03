@@ -1,0 +1,184 @@
+/* src/theme/tokens.css - Sky Surveyors Mint + Coral Design System Tokens */
+:root {
+  /* PRIMARY MINT (Main Brand & Learning) */
+  --color-mint-primary: #10B981;
+  --color-mint-dark: #059669;
+  --color-mint-light: #D1FAE5;
+  --color-mint-soft: #ECFDF5;
+  --color-mint-bg: #F0FDF4;
+  --color-mint-glow: rgba(16, 185, 129, 0.20);
+  --color-mint-grad: linear-gradient(135deg, #10B981, #34D399);
+
+  /* CORAL (Practice & Challenges Accent) */
+  --color-coral-primary: #FF6B6B;
+  --color-coral-dark: #F43F5E;
+  --color-coral-light: #FFE4E6;
+  --color-coral-bg: #FFF5F5;
+  --color-coral-glow: rgba(255, 107, 107, 0.20);
+  --color-coral-grad: linear-gradient(135deg, #FF6B6B, #FB7185);
+
+  /* REWARD YELLOW (Strictly for XP, Points, Stars, Coins, Badges, Achievements) */
+  --color-reward-yellow: #FBBF24;
+  --color-reward-light: #FEF3C7;
+  --color-soft-yellow: #FEF3C7;
+  --color-reward-dark: #D97706;
+  --color-reward-glow: rgba(251, 191, 36, 0.30);
+
+  /* FEEDBACK & VALIDATION STATES */
+  --color-success: #22C55E;
+  --color-success-bg: #DCFCE7;
+  --color-error: #EF4444;
+  --color-error-bg: #FEE2E2;
+
+  /* NEUTRALS & TYPOGRAPHY */
+  --text-main: #16352A;
+  --text-muted: #64748B;
+  --color-ink-deep: #16352A;
+  --color-ink-soft: #2D4F42;
+  --color-ink-muted: #64748B;
+
+  /* SURFACES & STRUCTURAL CONTAINERS */
+  --bg-page: #E8F4EE;
+  --bg-current: #E8F4EE;
+  --bg-secondary: #DCEDE4;
+  --surface-inset: #E2F1E8;
+  --card-bg: #FFFFFF;
+  --card-border: #C4E3D3;
+  --header-bg: rgba(244, 251, 247, 0.95);
+  --surface-card: #FFFFFF;
+  --surface-card-border: #C4E3D3;
+  --surface-glass: rgba(255, 255, 255, 0.92);
+  --surface-glass-border: #C4E3D3;
+  --surface-glass-blur: blur(14px);
+
+  /* SUBTLE LIVING PAGE BACKGROUND (COMFORTABLE EYE-FRIENDLY TONE) */
+  --bg-gradient:
+    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.16), transparent 38%),
+    radial-gradient(circle at 90% 30%, rgba(255, 107, 107, 0.12), transparent 35%),
+    linear-gradient(180deg, #E8F4EE 0%, #DBEDE2 100%);
+
+  /* NAVIGATION TOKENS */
+  --nav-active: #10B981;
+  --nav-inactive: #64748B;
+  --nav-active-bg: #D1FAE5;
+  --nav-hover-bg: #ECFDF5;
+
+  /* PROGRESS BAR TOKENS */
+  --progress-track: #E5F5EC;
+  --progress-bar: #10B981;
+  --progress-completed: #22C55E;
+  --progress-current: #10B981;
+  --progress-milestone: #FF6B6B;
+
+  /* LEGACY ALIASES FOR COMPATIBILITY */
+  --color-zenith-blue: #10B981;
+  --color-zenith-hover: #059669;
+  --color-zenith-glow: rgba(16, 185, 129, 0.20);
+  --color-sunlight: #FBBF24;
+  --color-sunlight-glow: rgba(251, 191, 36, 0.30);
+
+  /* GEOMETRY TRI-COLOR IDENTITY */
+  --color-side-hyp: #6366F1;
+  --color-side-hyp-glow: rgba(99, 102, 241, 0.15);
+  --color-side-opp: #FF6B6B;
+  --color-side-opp-glow: rgba(255, 107, 107, 0.15);
+  --color-side-adj: #10B981;
+  --color-side-adj-glow: rgba(16, 185, 129, 0.15);
+
+  /* TYPOGRAPHY FONTS */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-notes: 'Caveat', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* SHADOWS & SOLAR ELEVATION */
+  --sun-elev: 48deg;
+  --sun-dir: 1;
+  --lift-card: 4px;
+  --lift-button: 2px;
+  --shadow-len-card: min(calc(var(--lift-card) / tan(var(--sun-elev))), 16px);
+  --shadow-len-button: min(calc(var(--lift-button) / tan(var(--sun-elev))), 8px);
+  --shadow-ink: rgba(22, 53, 42, 0.04);
+
+  /* BORDER RADII (16–20px for cards) */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  /* LAYOUT */
+  --header-height: 70px;
+  --instrument-belt-height: 60px;
+  --margin-width: 380px;
+}
+
+/* Fallback for browsers lacking CSS tan() */
+@supports not (box-shadow: calc(1px / tan(45deg)) 0 0 red) {
+  :root {
+    --shadow-len-card: 4px;
+    --shadow-len-button: 2px;
+  }
+}
+
+/* Level 1: Morning Shadows - Fresh Mint & Subtle Coral Accents */
+[data-level="1"] {
+  --sun-elev: 48deg;
+  --sun-dir: 1;
+  --bg-gradient:
+    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.16), transparent 38%),
+    radial-gradient(circle at 90% 30%, rgba(255, 107, 107, 0.12), transparent 35%),
+    linear-gradient(180deg, #E8F4EE 0%, #DCEEE3 100%);
+  --bg-current: #E8F4EE;
+  --text-main: #16352A;
+  --text-muted: #64748B;
+  --card-bg: #FFFFFF;
+  --card-border: #C4E3D3;
+  --surface-inset: #E1F1E8;
+  --header-bg: rgba(244, 251, 247, 0.95);
+}
+
+/* Level 2: Golden Circles - Warm Subtle Sun Glow */
+[data-level="2"] {
+  --sun-elev: 32deg;
+  --sun-dir: 1;
+  --bg-gradient:
+    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.14), transparent 38%),
+    radial-gradient(circle at 85% 25%, rgba(251, 191, 36, 0.15), transparent 35%),
+    radial-gradient(circle at 90% 60%, rgba(255, 107, 107, 0.11), transparent 32%),
+    linear-gradient(180deg, #E8F4EE 0%, #DDEFE5 100%);
+  --bg-current: #E8F4EE;
+  --text-main: #16352A;
+  --text-muted: #64748B;
+  --card-bg: #FFFFFF;
+  --card-border: #C4E3D3;
+  --surface-inset: #E1F1E7;
+  --header-bg: rgba(244, 251, 247, 0.95);
+}
+
+/* Level 3: Sky Engineers - Clean Modern Starlight Tint */
+[data-level="3"] {
+  --sun-elev: 55deg;
+  --sun-dir: -1;
+  --bg-gradient:
+    radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.16), transparent 38%),
+    radial-gradient(circle at 85% 30%, rgba(255, 107, 107, 0.14), transparent 35%),
+    linear-gradient(180deg, #E7F3ED 0%, #DBEBE1 100%);
+  --bg-current: #E7F3ED;
+  --text-main: #16352A;
+  --text-muted: #64748B;
+  --card-bg: #FFFFFF;
+  --card-border: #C4E3D3;
+  --surface-inset: #E0EFE6;
+  --header-bg: rgba(244, 251, 247, 0.95);
+}
+
+/* Accessibility Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
