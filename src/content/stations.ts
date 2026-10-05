@@ -5,6 +5,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   // --- LEVEL 1 STATIONS ---
   '1A': {
     id: '1A',
+    shortTitle: 'Shadows',
     level: 1,
     title: 'The Shadow Lab',
     subtitle: 'Discover how angle tilt controls the ratio of height to shadow',
@@ -30,6 +31,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '1B': {
     id: '1B',
+    shortTitle: 'Ratios',
     level: 1,
     title: 'Side Namer & Ratio Builder',
     subtitle: 'Master Hypotenuse, Opposite, and Adjacent relative to angle θ',
@@ -55,6 +57,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '1C': {
     id: '1C',
+    shortTitle: 'Special Angles',
     level: 1,
     title: 'Special Angle Forge',
     subtitle: 'Derive exact radical values for 30°, 45°, and 60° without a calculator',
@@ -80,6 +83,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '1D': {
     id: '1D',
+    shortTitle: 'Clinometer',
     level: 1,
     title: 'Missing-Side Solver',
     subtitle: 'Master the 5-step SCALE routine to solve real-world heights',
@@ -107,6 +111,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   // --- LEVEL 2 STATIONS ---
   '2A': {
     id: '2A',
+    shortTitle: 'Unit Circle',
     level: 2,
     title: 'Unit Circle Playground',
     subtitle: 'Coordinates as trigonometry for any angle up to 360° and beyond',
@@ -132,6 +137,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '2B': {
     id: '2B',
+    shortTitle: 'Wave Tracer',
     level: 2,
     title: 'Wave Tracer',
     subtitle: 'Why rotating around a circle draws a continuous sinusoidal wave',
@@ -157,6 +163,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '2C': {
     id: '2C',
+    shortTitle: 'Radians',
     level: 2,
     title: 'Radian Roller',
     subtitle: 'Measure angles by walking the circle’s own radius along the rim',
@@ -177,6 +184,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '2D': {
     id: '2D',
+    shortTitle: 'Identities',
     level: 2,
     title: 'The Identity Lab',
     subtitle: 'Connect the right triangle, the unit circle, and Pythagoras',
@@ -202,6 +210,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '2E': {
     id: '2E',
+    shortTitle: 'Dual Heights',
     level: 2,
     title: 'Height & Distance Studio',
     subtitle: 'Solve complex two-observer problems sharing a common vertical baseline',
@@ -229,6 +238,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   // --- LEVEL 3 STATIONS ---
   '3A': {
     id: '3A',
+    shortTitle: 'Angle Mixer',
     level: 3,
     title: 'The Angle Mixer',
     subtitle: 'Discover why sin(A + B) ≠ sin A + sin B through compound rotations',
@@ -254,6 +264,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '3B': {
     id: '3B',
+    shortTitle: 'Wave Studio',
     level: 3,
     title: 'Wave Interference Studio',
     subtitle: 'Acoustic cancellation and transformation parameters A, B, C, D',
@@ -279,6 +290,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '3C': {
     id: '3C',
+    shortTitle: 'Ambiguous Case',
     level: 3,
     title: 'Triangle Solver Lab',
     subtitle: 'The Law of Sines, Law of Cosines, and the SSA Ambiguous Case',
@@ -304,6 +316,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '3D': {
     id: '3D',
+    shortTitle: 'Proof Builder',
     level: 3,
     title: 'The Proof Builder',
     subtitle: 'Master the one-sided transformation protocol for analytic proofs',
@@ -329,6 +342,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '3E': {
     id: '3E',
+    shortTitle: 'Equations',
     level: 3,
     title: 'Equation Detective',
     subtitle: 'Find all solutions on intervals and general solutions across all real numbers',
@@ -354,6 +368,7 @@ export const STATIONS_REGISTRY: Record<string, StationDefinition> = {
   },
   '3F': {
     id: '3F',
+    shortTitle: 'Ancient Powers',
     level: 3,
     title: 'Ancient Superpowers (Boost)',
     subtitle: 'Test 7th-century rational approximations and Mādhava’s infinite series',

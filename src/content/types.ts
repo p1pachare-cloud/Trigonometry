@@ -47,6 +47,7 @@ export interface StationTestOption {
 
 export interface StationDefinition {
   id: string; // '1A', '1B', etc.
+  shortTitle?: string; // friendly short name, e.g. 'Shadows', 'Ratios'
   level: LevelId;
   title: string;
   subtitle: string;

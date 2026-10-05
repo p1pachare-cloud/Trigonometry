@@ -67,30 +67,67 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '0 24px',
+          padding: '0 18px',
+          gap: '12px',
         }}
       >
         {/* Brand & Level Selectors */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
           <div
-            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}
+            style={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              flexShrink: 0,
+              userSelect: 'none',
+            }}
             onClick={() => dispatch({ type: 'NAVIGATE', payload: { view: 'main', phase: 'wonder' } })}
           >
-            <span style={{ fontSize: '1.7rem', filter: 'drop-shadow(0 2px 4px rgba(16,185,129,0.2))' }}>🔭</span>
-            <div>
-              <h1
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '12px',
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(16, 185, 129, 0.06))',
+                border: '1.5px solid rgba(16, 185, 129, 0.35)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.35rem',
+                flexShrink: 0,
+                boxShadow: '0 2px 8px rgba(16, 185, 129, 0.12)',
+              }}
+            >
+              🔭
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '1.3rem',
+                  fontSize: '1.25rem',
                   fontWeight: 800,
                   margin: 0,
                   color: 'var(--text-main)',
                   letterSpacing: '-0.02em',
+                  whiteSpace: 'nowrap',
+                  lineHeight: 1.15,
                 }}
               >
                 Sky Surveyors
-              </h1>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-coral-primary)', fontWeight: 700 }}>
+              </div>
+              <div
+                style={{
+                  fontSize: '0.68rem',
+                  color: 'var(--color-coral-primary)',
+                  fontWeight: 800,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  whiteSpace: 'nowrap',
+                  lineHeight: 1.2,
+                  marginTop: '1px',
+                }}
+              >
                 Trigonometry Adventures
               </div>
             </div>
@@ -105,6 +142,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
               padding: '4px',
               borderRadius: 'var(--radius-md)',
               border: '1px solid var(--card-border)',
+              flexShrink: 0,
             }}
           >
             {[1, 2, 3].map(lvl => {
@@ -124,6 +162,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
                     fontWeight: isCurrent ? 800 : 600,
                     boxShadow: isCurrent ? '0 2px 8px var(--color-mint-glow)' : 'none',
                     border: 'none',
+                    whiteSpace: 'nowrap',
                   }}
                   onClick={() => handleLevelChange(lvl as LevelId)}
                 >
@@ -136,10 +175,10 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
         </div>
 
         {/* Phase Tabs & Living Sun Arc */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
           <SunArc />
 
-          <nav style={{ display: 'flex', gap: '5px' }}>
+          <nav style={{ display: 'flex', gap: '4px' }}>
             {(['wonder', 'story', 'simulate', 'practice', 'boss'] as const).map(p => {
               const isActive = phase === p && view === 'main';
               return (
@@ -148,9 +187,10 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
                   type="button"
                   className={`trig-nav-tab ${isActive ? 'active' : ''}`}
                   style={{
-                    padding: '6px 14px',
-                    fontSize: '0.85rem',
+                    padding: '6px 13px',
+                    fontSize: '0.84rem',
                     borderRadius: 'var(--radius-md)',
+                    whiteSpace: 'nowrap',
                   }}
                   onClick={() => {
                     dispatch({ type: 'NAVIGATE', payload: { view: 'main' } });
@@ -165,7 +205,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
         </div>
 
         {/* Action Controls & Utilities */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '7px', flexShrink: 0 }}>
           {/* Notation Switch */}
           <button
             type="button"
@@ -248,27 +288,27 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
       </header>
 
       {/* Main Viewport Content */}
-      <main style={{ flex: 1, paddingBottom: '88px' }}>{children}</main>
+      <main style={{ flex: 1, paddingBottom: '60px' }}>{children}</main>
 
       {/* Floating Instrument Belt */}
       <footer
         style={{
           position: 'fixed',
-          bottom: '14px',
+          bottom: '10px',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 90,
           display: 'flex',
-          gap: '10px',
-          padding: '6px 18px',
+          gap: '8px',
+          padding: '4px 14px',
           background: 'var(--surface-glass)',
           backdropFilter: 'var(--surface-glass-blur)',
           borderRadius: 'var(--radius-full)',
           border: '1px solid var(--card-border)',
-          boxShadow: '0 8px 30px rgba(16, 185, 129, 0.12)',
+          boxShadow: '0 4px 20px rgba(16, 185, 129, 0.12)',
         }}
       >
-        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', fontWeight: 600 }}>
+        <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', fontWeight: 600 }}>
           Tools:
         </span>
         <button

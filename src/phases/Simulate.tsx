@@ -108,39 +108,49 @@ export const Simulate: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '24px 16px' }}>
+    <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '14px 16px' }}>
       {/* Station Header & Station Switcher */}
-      <div className="trig-card" style={{ padding: '20px', marginBottom: '20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+      <div className="trig-card" style={{ padding: '12px 18px', marginBottom: '12px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <span className="side-pill side-pill-hyp">Station {currentStation.id}</span>
-              <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Level {level} Simulations</span>
+              <span className="side-pill side-pill-hyp" style={{ padding: '2px 10px', fontSize: '0.8rem' }}>
+                Lab {currentStationIdx + 1} · {currentStation.shortTitle || currentStation.title}
+              </span>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Level {level} Simulations</span>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.6rem', margin: '4px 0 0 0' }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.3rem', margin: '2px 0 0 0' }}>
               {currentStation.title}
             </h2>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>{currentStation.subtitle}</div>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>{currentStation.subtitle}</div>
           </div>
 
           {/* Station Pills */}
-          <div style={{ display: 'flex', gap: '6px' }}>
-            {allStationKeys.map(key => {
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+            {allStationKeys.map((key, idx) => {
+              const st = STATIONS_REGISTRY[key];
               const isDone = !!state.progress.stationsDone[key];
               const isCurrent = key === currentStation.id;
+              const name = st?.shortTitle || st?.title || `Lab ${idx + 1}`;
               return (
                 <button
                   key={key}
                   type="button"
                   className="trig-btn"
                   style={{
-                    padding: '6px 12px',
-                    fontSize: '0.85rem',
+                    padding: '5px 12px',
+                    fontSize: '0.82rem',
+                    borderRadius: 'var(--radius-full)',
                     background: isCurrent ? 'var(--color-mint-primary)' : isDone ? 'var(--color-success-bg)' : 'var(--surface-inset)',
                     color: isCurrent ? '#ffffff' : isDone ? 'var(--color-success)' : 'var(--text-main)',
                     border: isDone ? '1px solid var(--color-success)' : isCurrent ? '1px solid var(--color-mint-dark)' : '1px solid var(--card-border)',
-                    fontWeight: 700,
+                    fontWeight: isCurrent ? 800 : 600,
+                    boxShadow: isCurrent ? '0 2px 8px var(--color-mint-glow)' : 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
                   }}
+                  title={st?.title}
                   onClick={() => {
                     sound.click();
                     dispatch({ type: 'NAVIGATE', payload: { stationId: key } });
@@ -153,7 +163,8 @@ export const Simulate: React.FC = () => {
                     setHasFormalised(false);
                   }}
                 >
-                  {key} {isDone && '✔'}
+                  <span>{name}</span>
+                  {isDone && <span style={{ fontSize: '0.75rem' }}>✔</span>}
                 </button>
               );
             })}
@@ -161,7 +172,7 @@ export const Simulate: React.FC = () => {
         </div>
 
         {/* 4-Step Cycle Tabs with Fraction-Isles Style Completion Checklist */}
-        <div style={{ display: 'flex', gap: '8px', marginTop: '16px', borderTop: '1px solid var(--card-border)', paddingTop: '12px' }}>
+        <div style={{ display: 'flex', gap: '6px', marginTop: '10px', borderTop: '1px solid var(--card-border)', paddingTop: '8px' }}>
           {(['predict', 'explore', 'formalise', 'test'] as const).map(tab => {
             const isActive = subPhase === tab;
             const isTest = tab === 'test';
@@ -178,15 +189,15 @@ export const Simulate: React.FC = () => {
                 className="trig-btn"
                 style={{
                   flex: 1,
-                  padding: '8px 0',
-                  fontSize: '0.82rem',
+                  padding: '6px 0',
+                  fontSize: '0.8rem',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.04em',
+                  letterSpacing: '0.03em',
                   borderRadius: 'var(--radius-sm)',
                   background: isActive ? (isTest ? 'var(--color-coral-primary)' : 'var(--color-mint-primary)') : 'transparent',
                   color: isActive ? '#ffffff' : 'var(--text-muted)',
                   fontWeight: isActive ? 800 : 600,
-                  boxShadow: isActive ? (isTest ? '0 2px 10px var(--color-coral-glow)' : '0 2px 10px var(--color-mint-glow)') : 'none',
+                  boxShadow: isActive ? (isTest ? '0 2px 8px var(--color-coral-glow)' : '0 2px 8px var(--color-mint-glow)') : 'none',
                 }}
                 onClick={() => switchSubPhase(tab)}
               >
@@ -317,8 +328,28 @@ export const Simulate: React.FC = () => {
       {/* --- SUB-PHASE 2: EXPLORE --- */}
       {subPhase === 'explore' && (
         <div>
-          <div style={{ marginBottom: '16px', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-            💡 {currentStation.exploreGuide}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '10px',
+              gap: '12px',
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span>💡</span>
+              <span>{currentStation.exploreGuide}</span>
+            </div>
+            <button
+              type="button"
+              className="trig-btn trig-btn-primary"
+              style={{ padding: '6px 14px', fontSize: '0.85rem' }}
+              onClick={() => switchSubPhase('formalise')}
+            >
+              Next: Formalise ➔
+            </button>
           </div>
 
           {/* Render Contextual Interactive Component */}
@@ -369,12 +400,6 @@ export const Simulate: React.FC = () => {
           {(currentStation.id === '3E' || currentStation.id === '3F') && (
             <UnitCircle initialAngle={210} />
           )}
-
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-            <button type="button" className="trig-btn trig-btn-primary" onClick={() => switchSubPhase('formalise')}>
-              Next: Formalise the Discovery ➔
-            </button>
-          </div>
         </div>
       )}
 
