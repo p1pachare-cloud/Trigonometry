@@ -24,13 +24,14 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
   const radA = degToRad(angleA);
   const altitudeH = sideB * Math.sin(radA);
 
-  // SVG dimensions: 460 x 210
-  // Recalibrated scale and coordinates so all arcs, labels, and geometry stay 100% within the viewport
-  const scale = 10.5;
-  const Ax = 55;
-  const Ay = 140;
-  const Cx = Ax + sideB * Math.cos(radA) * scale; // ~ 146.0
-  const Cy = Ay - sideB * Math.sin(radA) * scale; // ~ 87.5
+  // SVG dimensions: 500 x 240
+  // Calibrated scale (9.0) and center coordinates so the continuous swinging arc,
+  // vertices, and all labels remain 100% visible on screen with generous padding
+  const scale = 9.0;
+  const Ax = 115;
+  const Ay = 135;
+  const Cx = Ax + sideB * Math.cos(radA) * scale; // ~ 192.9
+  const Cy = Ay - sideB * Math.sin(radA) * scale; // ~ 90.0
 
   const swingRadius = sideA * scale;
 
@@ -41,13 +42,13 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
   const updateRadiusFromPointer = useCallback((clientX: number, clientY: number) => {
     if (!svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
-    const svgX = ((clientX - rect.left) / rect.width) * 460;
-    const svgY = ((clientY - rect.top) / rect.height) * 210;
+    const svgX = ((clientX - rect.left) / rect.width) * 500;
+    const svgY = ((clientY - rect.top) / rect.height) * 240;
 
     const dx = svgX - Cx;
     const dy = svgY - Cy;
     const distPx = Math.sqrt(dx * dx + dy * dy);
-    const newSide = Math.max(3.5, Math.min(12.0, distPx / scale));
+    const newSide = Math.max(3.5, Math.min(11.5, distPx / scale));
     setSideA(Number(newSide.toFixed(1)));
   }, [Cx, Cy, scale]);
 
@@ -85,53 +86,21 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
   const xIntersect1 = Cx + dxIntersect; // Acute triangle vertex B1
   const xIntersect2 = Cx - dxIntersect; // Obtuse triangle vertex B2
 
-  // Mathematical Arc Paths:
-  // Proper geometric compass arcs that cleanly show baseline intersections without plunging subterranean
-  let primaryArcPath = '';
-  let exteriorArcPath = '';
+  // Single continuous, unbroken swinging arc that sweeps smoothly through the baseline:
+  // Dynamically sweeps through baseline intersections with full padding inside the canvas
+  let arcStartRad = (55 * Math.PI) / 180;
+  let arcEndRad = (125 * Math.PI) / 180;
 
-  if (!hasIntersections) {
-    // 0 Triangles: Swing around vertical altitude line to highlight gap above baseline
-    const halfSpan = 0.42;
-    const a1 = Math.PI / 2 - halfSpan;
-    const a2 = Math.PI / 2 + halfSpan;
-    const x1 = Cx + swingRadius * Math.cos(a1);
-    const y1 = Cy + swingRadius * Math.sin(a1);
-    const x2 = Cx + swingRadius * Math.cos(a2);
-    const y2 = Cy + swingRadius * Math.sin(a2);
-    primaryArcPath = `M ${x1} ${y1} A ${swingRadius} ${swingRadius} 0 0 1 ${x2} ${y2}`;
-  } else if (sideA < sideB) {
-    // 1 Right Triangle (a = h) or 2 Triangles (h < a < b):
-    // Smooth continuous arc sweeping from B1 through the bottom to B2
+  if (hasIntersections) {
     const theta0 = Math.asin(Math.min(1, altitudeH / sideA));
-    const a1 = Math.max(0.12, theta0 - 0.24);
-    const a2 = Math.min(Math.PI - 0.12, (Math.PI - theta0) + 0.24);
-    const x1 = Cx + swingRadius * Math.cos(a1);
-    const y1 = Cy + swingRadius * Math.sin(a1);
-    const x2 = Cx + swingRadius * Math.cos(a2);
-    const y2 = Cy + swingRadius * Math.sin(a2);
-    primaryArcPath = `M ${x1} ${y1} A ${swingRadius} ${swingRadius} 0 0 1 ${x2} ${y2}`;
-  } else {
-    // 1 Triangle (a >= b):
-    // Primary compass arc cuts right through vertex B1 on the baseline
-    const theta0 = Math.asin(Math.min(1, altitudeH / sideA));
-    const a1 = Math.max(0.08, theta0 - 0.28);
-    const a2 = theta0 + 0.28;
-    const x1 = Cx + swingRadius * Math.cos(a1);
-    const y1 = Cy + swingRadius * Math.sin(a1);
-    const x2 = Cx + swingRadius * Math.cos(a2);
-    const y2 = Cy + swingRadius * Math.sin(a2);
-    primaryArcPath = `M ${x1} ${y1} A ${swingRadius} ${swingRadius} 0 0 1 ${x2} ${y2}`;
-
-    // Discarded root behind vertex A (exterior to triangle angle A)
-    const ext1 = (Math.PI - theta0) - 0.25;
-    const ext2 = Math.min(Math.PI - 0.08, (Math.PI - theta0) + 0.25);
-    const ex1 = Cx + swingRadius * Math.cos(ext1);
-    const ey1 = Cy + swingRadius * Math.sin(ext1);
-    const ex2 = Cx + swingRadius * Math.cos(ext2);
-    const ey2 = Cy + swingRadius * Math.sin(ext2);
-    exteriorArcPath = `M ${ex1} ${ey1} A ${swingRadius} ${swingRadius} 0 0 1 ${ex2} ${ey2}`;
+    arcStartRad = Math.max(0.12, theta0 - 0.22);
+    arcEndRad = Math.min(Math.PI - 0.12, (Math.PI - theta0) + 0.22);
   }
+
+  const arcStartX = Cx + swingRadius * Math.cos(arcStartRad);
+  const arcStartY = Cy + swingRadius * Math.sin(arcStartRad);
+  const arcEndX = Cx + swingRadius * Math.cos(arcEndRad);
+  const arcEndY = Cy + swingRadius * Math.sin(arcEndRad);
 
   return (
     <div
@@ -208,17 +177,17 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
           style={{
             background: 'var(--surface-inset)',
             borderRadius: 'var(--radius-md)',
-            padding: '8px 12px',
+            padding: '10px 14px',
             border: '1px solid var(--card-border)',
             position: 'relative',
           }}
         >
           <svg
             ref={svgRef}
-            viewBox="0 0 460 210"
+            viewBox="0 0 500 240"
             style={{
               width: '100%',
-              maxHeight: '225px',
+              maxHeight: '250px',
               height: 'auto',
               display: 'block',
               touchAction: 'none',
@@ -257,8 +226,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
             )}
 
             {/* Baseline */}
-            <line x1="18" y1={Ay} x2="445" y2={Ay} stroke="var(--color-ink-deep)" strokeWidth="2.5" />
-            <text x="405" y={Ay - 8} fill="var(--text-muted)" fontSize="11" fontWeight="600">
+            <line x1="25" y1={Ay} x2="485" y2={Ay} stroke="var(--color-ink-deep)" strokeWidth="2.5" />
+            <text x="445" y={Ay - 8} fill="var(--text-muted)" fontSize="11" fontWeight="600" textAnchor="middle">
               Baseline
             </text>
 
@@ -312,30 +281,16 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
               {angleA}°
             </text>
 
-            {/* Primary Swinging Arc */}
-            {primaryArcPath && (
-              <path
-                d={primaryArcPath}
-                fill="none"
-                stroke="var(--color-sunlight)"
-                strokeWidth="2.5"
-                strokeDasharray="5 4"
-                filter="url(#arcGlow)"
-                opacity="0.95"
-              />
-            )}
-
-            {/* Exterior Arc behind vertex A for a >= b case */}
-            {exteriorArcPath && (
-              <path
-                d={exteriorArcPath}
-                fill="none"
-                stroke="var(--text-muted)"
-                strokeWidth="2"
-                strokeDasharray="3 3"
-                opacity="0.5"
-              />
-            )}
+            {/* Single Continuous Swinging Arc: fully visible, never cut */}
+            <path
+              d={`M ${arcStartX} ${arcStartY} A ${swingRadius} ${swingRadius} 0 0 1 ${arcEndX} ${arcEndY}`}
+              fill="none"
+              stroke="var(--color-sunlight)"
+              strokeWidth="2.5"
+              strokeDasharray="6 4"
+              filter="url(#arcGlow)"
+              opacity="0.95"
+            />
 
             {/* If 0 Triangles: Gap visualization showing side a too short */}
             {result.triangleCount === 0 && (
@@ -389,7 +344,7 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
 
             {/* Vertex A */}
             <circle cx={Ax} cy={Ay} r="5" fill="var(--color-zenith-blue)" />
-            <text x={Ax - 20} y={Ay - 6} fill="var(--color-ink-deep)" fontWeight="800" fontSize="13">
+            <text x={Ax - 16} y={Ay - 6} fill="var(--color-ink-deep)" fontWeight="800" fontSize="13">
               A
             </text>
 
@@ -445,7 +400,7 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
                   fontWeight="600"
                   fontSize="10"
                 >
-                  Behind A (exterior)
+                  Outside Δ
                 </text>
               </>
             )}
