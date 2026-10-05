@@ -354,7 +354,11 @@ export const Simulate: React.FC = () => {
 
           {/* Render Contextual Interactive Component */}
           {(currentStation.id === '1A' || currentStation.id === '1B' || currentStation.id === '1C') && (
-            <TriangleLab initialTheta={currentStation.id === '1C' ? 30 : 35} />
+            <TriangleLab
+              initialTheta={currentStation.id === '1C' ? 30 : 35}
+              stationId={currentStation.id}
+              onProceedToFormalise={() => switchSubPhase('formalise')}
+            />
           )}
 
           {currentStation.id === '1D' && (
