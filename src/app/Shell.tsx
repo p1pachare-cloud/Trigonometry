@@ -288,7 +288,7 @@ export const Shell: React.FC<ShellProps> = ({ children }) => {
       </header>
 
       {/* Main Viewport Content */}
-      <main style={{ flex: 1, paddingBottom: '60px' }}>{children}</main>
+      <main style={{ flex: 1, paddingBottom: '45px' }}>{children}</main>
 
       {/* Floating Instrument Belt */}
       <footer

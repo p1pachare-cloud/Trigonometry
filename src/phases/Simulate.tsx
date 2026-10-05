@@ -108,9 +108,9 @@ export const Simulate: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '14px 16px' }}>
+    <div style={{ maxWidth: '1080px', margin: '0 auto', padding: '10px 16px' }}>
       {/* Station Header & Station Switcher */}
-      <div className="trig-card" style={{ padding: '12px 18px', marginBottom: '12px' }}>
+      <div className="trig-card" style={{ padding: '10px 16px', marginBottom: '8px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
           <div>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -119,10 +119,10 @@ export const Simulate: React.FC = () => {
               </span>
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Level {level} Simulations</span>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.3rem', margin: '2px 0 0 0' }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', margin: '2px 0 0 0' }}>
               {currentStation.title}
             </h2>
-            <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>{currentStation.subtitle}</div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{currentStation.subtitle}</div>
           </div>
 
           {/* Station Pills */}
@@ -138,8 +138,8 @@ export const Simulate: React.FC = () => {
                   type="button"
                   className="trig-btn"
                   style={{
-                    padding: '5px 12px',
-                    fontSize: '0.82rem',
+                    padding: '4px 10px',
+                    fontSize: '0.8rem',
                     borderRadius: 'var(--radius-full)',
                     background: isCurrent ? 'var(--color-mint-primary)' : isDone ? 'var(--color-success-bg)' : 'var(--surface-inset)',
                     color: isCurrent ? '#ffffff' : isDone ? 'var(--color-success)' : 'var(--text-main)',
@@ -172,7 +172,7 @@ export const Simulate: React.FC = () => {
         </div>
 
         {/* 4-Step Cycle Tabs with Fraction-Isles Style Completion Checklist */}
-        <div style={{ display: 'flex', gap: '6px', marginTop: '10px', borderTop: '1px solid var(--card-border)', paddingTop: '8px' }}>
+        <div style={{ display: 'flex', gap: '6px', marginTop: '6px', borderTop: '1px solid var(--card-border)', paddingTop: '6px' }}>
           {(['predict', 'explore', 'formalise', 'test'] as const).map(tab => {
             const isActive = subPhase === tab;
             const isTest = tab === 'test';
@@ -333,7 +333,7 @@ export const Simulate: React.FC = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              marginBottom: '10px',
+              marginBottom: '6px',
               gap: '12px',
               flexWrap: 'wrap',
             }}

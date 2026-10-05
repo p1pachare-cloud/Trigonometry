@@ -24,13 +24,13 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
   const radA = degToRad(angleA);
   const altitudeH = sideB * Math.sin(radA);
 
-  // SVG dimensions: 460 x 235
-  // Gracefully scaled so diagram is larger and clearer while fitting within viewport
-  const scale = 15.5;
-  const Ax = 45;
-  const Ay = 192;
-  const Cx = Ax + sideB * Math.cos(radA) * scale; // ~ 179.2
-  const Cy = Ay - sideB * Math.sin(radA) * scale; // ~ 114.5
+  // SVG dimensions: 460 x 210
+  // Recalibrated scale and coordinates so all arcs, labels, and geometry stay 100% within the viewport
+  const scale = 10.5;
+  const Ax = 55;
+  const Ay = 140;
+  const Cx = Ax + sideB * Math.cos(radA) * scale; // ~ 146.0
+  const Cy = Ay - sideB * Math.sin(radA) * scale; // ~ 87.5
 
   const swingRadius = sideA * scale;
 
@@ -42,12 +42,12 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
     if (!svgRef.current) return;
     const rect = svgRef.current.getBoundingClientRect();
     const svgX = ((clientX - rect.left) / rect.width) * 460;
-    const svgY = ((clientY - rect.top) / rect.height) * 235;
+    const svgY = ((clientY - rect.top) / rect.height) * 210;
 
     const dx = svgX - Cx;
     const dy = svgY - Cy;
     const distPx = Math.sqrt(dx * dx + dy * dy);
-    const newSide = Math.max(3.5, Math.min(13, distPx / scale));
+    const newSide = Math.max(3.5, Math.min(12.0, distPx / scale));
     setSideA(Number(newSide.toFixed(1)));
   }, [Cx, Cy, scale]);
 
@@ -85,20 +85,59 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
   const xIntersect1 = Cx + dxIntersect; // Acute triangle vertex B1
   const xIntersect2 = Cx - dxIntersect; // Obtuse triangle vertex B2
 
-  // Angles for the visual swinging arc (sweeping downward across baseline)
-  const arcStartRad = (18 * Math.PI) / 180;
-  const arcEndRad = (162 * Math.PI) / 180;
-  const arcStartX = Cx + swingRadius * Math.cos(arcStartRad);
-  const arcStartY = Cy + swingRadius * Math.sin(arcStartRad);
-  const arcEndX = Cx + swingRadius * Math.cos(arcEndRad);
-  const arcEndY = Cy + swingRadius * Math.sin(arcEndRad);
+  // Mathematical Arc Paths:
+  // Proper geometric compass arcs that cleanly show baseline intersections without plunging subterranean
+  let primaryArcPath = '';
+  let exteriorArcPath = '';
+
+  if (!hasIntersections) {
+    // 0 Triangles: Swing around vertical altitude line to highlight gap above baseline
+    const halfSpan = 0.42;
+    const a1 = Math.PI / 2 - halfSpan;
+    const a2 = Math.PI / 2 + halfSpan;
+    const x1 = Cx + swingRadius * Math.cos(a1);
+    const y1 = Cy + swingRadius * Math.sin(a1);
+    const x2 = Cx + swingRadius * Math.cos(a2);
+    const y2 = Cy + swingRadius * Math.sin(a2);
+    primaryArcPath = `M ${x1} ${y1} A ${swingRadius} ${swingRadius} 0 0 1 ${x2} ${y2}`;
+  } else if (sideA < sideB) {
+    // 1 Right Triangle (a = h) or 2 Triangles (h < a < b):
+    // Smooth continuous arc sweeping from B1 through the bottom to B2
+    const theta0 = Math.asin(Math.min(1, altitudeH / sideA));
+    const a1 = Math.max(0.12, theta0 - 0.24);
+    const a2 = Math.min(Math.PI - 0.12, (Math.PI - theta0) + 0.24);
+    const x1 = Cx + swingRadius * Math.cos(a1);
+    const y1 = Cy + swingRadius * Math.sin(a1);
+    const x2 = Cx + swingRadius * Math.cos(a2);
+    const y2 = Cy + swingRadius * Math.sin(a2);
+    primaryArcPath = `M ${x1} ${y1} A ${swingRadius} ${swingRadius} 0 0 1 ${x2} ${y2}`;
+  } else {
+    // 1 Triangle (a >= b):
+    // Primary compass arc cuts right through vertex B1 on the baseline
+    const theta0 = Math.asin(Math.min(1, altitudeH / sideA));
+    const a1 = Math.max(0.08, theta0 - 0.28);
+    const a2 = theta0 + 0.28;
+    const x1 = Cx + swingRadius * Math.cos(a1);
+    const y1 = Cy + swingRadius * Math.sin(a1);
+    const x2 = Cx + swingRadius * Math.cos(a2);
+    const y2 = Cy + swingRadius * Math.sin(a2);
+    primaryArcPath = `M ${x1} ${y1} A ${swingRadius} ${swingRadius} 0 0 1 ${x2} ${y2}`;
+
+    // Discarded root behind vertex A (exterior to triangle angle A)
+    const ext1 = (Math.PI - theta0) - 0.25;
+    const ext2 = Math.min(Math.PI - 0.08, (Math.PI - theta0) + 0.25);
+    const ex1 = Cx + swingRadius * Math.cos(ext1);
+    const ey1 = Cy + swingRadius * Math.sin(ext1);
+    const ex2 = Cx + swingRadius * Math.cos(ext2);
+    const ey2 = Cy + swingRadius * Math.sin(ext2);
+    exteriorArcPath = `M ${ex1} ${ey1} A ${swingRadius} ${swingRadius} 0 0 1 ${ex2} ${ey2}`;
+  }
 
   return (
     <div
       className={`swing-triangle-container trig-card ${className}`}
       style={{
-        padding: '18px 22px',
-        maxHeight: '100%',
+        padding: '12px 18px',
         boxSizing: 'border-box',
       }}
     >
@@ -109,15 +148,15 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '10px',
-          marginBottom: '12px',
+          gap: '8px',
+          marginBottom: '10px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <h4 style={{ fontFamily: 'var(--font-display)', margin: 0, fontSize: '1.2rem', color: 'var(--text-main)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h4 style={{ fontFamily: 'var(--font-display)', margin: 0, fontSize: '1.15rem', color: 'var(--text-main)' }}>
             The Ambiguous Case (SSA) Arc
           </h4>
-          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             Fixed: ∠A = {angleA}°, b = {sideB} | Altitude h = {altitudeH.toFixed(1)}
           </span>
         </div>
@@ -125,8 +164,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
         <span
           className="side-pill"
           style={{
-            padding: '4px 12px',
-            fontSize: '0.85rem',
+            padding: '3px 10px',
+            fontSize: '0.82rem',
             background:
               result.triangleCount === 2
                 ? 'var(--color-sunlight-glow)'
@@ -159,8 +198,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(330px, 1fr))',
-          gap: '18px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '14px',
           alignItems: 'center',
         }}
       >
@@ -169,17 +208,17 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
           style={{
             background: 'var(--surface-inset)',
             borderRadius: 'var(--radius-md)',
-            padding: '10px 14px',
+            padding: '8px 12px',
             border: '1px solid var(--card-border)',
             position: 'relative',
           }}
         >
           <svg
             ref={svgRef}
-            viewBox="0 0 460 235"
+            viewBox="0 0 460 210"
             style={{
               width: '100%',
-              maxHeight: '275px',
+              maxHeight: '225px',
               height: 'auto',
               display: 'block',
               touchAction: 'none',
@@ -218,8 +257,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
             )}
 
             {/* Baseline */}
-            <line x1="20" y1={Ay} x2="440" y2={Ay} stroke="var(--color-ink-deep)" strokeWidth="2.5" />
-            <text x="385" y={Ay + 18} fill="var(--text-muted)" fontSize="12" fontWeight="600">
+            <line x1="18" y1={Ay} x2="445" y2={Ay} stroke="var(--color-ink-deep)" strokeWidth="2.5" />
+            <text x="405" y={Ay - 8} fill="var(--text-muted)" fontSize="11" fontWeight="600">
               Baseline
             </text>
 
@@ -242,7 +281,7 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
             />
             <text
               x={Cx + 6}
-              y={(Cy + Ay) / 2 + 4}
+              y={(Cy + Ay) / 2 + 3}
               fill="var(--color-coral-dark)"
               fontWeight="800"
               fontSize="12"
@@ -253,8 +292,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
             {/* Fixed Side b (from A to C) */}
             <line x1={Ax} y1={Ay} x2={Cx} y2={Cy} stroke="var(--color-side-hyp)" strokeWidth="4" />
             <text
-              x={(Ax + Cx) / 2 - 20}
-              y={(Ay + Cy) / 2 - 10}
+              x={(Ax + Cx) / 2 - 18}
+              y={(Ay + Cy) / 2 - 8}
               fill="var(--color-side-hyp)"
               fontWeight="800"
               fontSize="13"
@@ -264,25 +303,39 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
 
             {/* Angle A Arc & Label */}
             <path
-              d={`M ${Ax + 32} ${Ay} A 32 32 0 0 0 ${Ax + 32 * Math.cos(radA)} ${Ay - 32 * Math.sin(radA)}`}
+              d={`M ${Ax + 26} ${Ay} A 26 26 0 0 0 ${Ax + 26 * Math.cos(radA)} ${Ay - 26 * Math.sin(radA)}`}
               fill="none"
               stroke="var(--color-sunlight)"
               strokeWidth="2.5"
             />
-            <text x={Ax + 36} y={Ay - 8} fill="var(--color-ink-deep)" fontWeight="700" fontSize="12">
+            <text x={Ax + 32} y={Ay - 6} fill="var(--color-ink-deep)" fontWeight="700" fontSize="12">
               {angleA}°
             </text>
 
-            {/* Swinging Arc (sweeping downward) */}
-            <path
-              d={`M ${arcStartX} ${arcStartY} A ${swingRadius} ${swingRadius} 0 0 1 ${arcEndX} ${arcEndY}`}
-              fill="none"
-              stroke="var(--color-sunlight)"
-              strokeWidth="2.5"
-              strokeDasharray="5 4"
-              filter="url(#arcGlow)"
-              opacity="0.85"
-            />
+            {/* Primary Swinging Arc */}
+            {primaryArcPath && (
+              <path
+                d={primaryArcPath}
+                fill="none"
+                stroke="var(--color-sunlight)"
+                strokeWidth="2.5"
+                strokeDasharray="5 4"
+                filter="url(#arcGlow)"
+                opacity="0.95"
+              />
+            )}
+
+            {/* Exterior Arc behind vertex A for a >= b case */}
+            {exteriorArcPath && (
+              <path
+                d={exteriorArcPath}
+                fill="none"
+                stroke="var(--text-muted)"
+                strokeWidth="2"
+                strokeDasharray="3 3"
+                opacity="0.5"
+              />
+            )}
 
             {/* If 0 Triangles: Gap visualization showing side a too short */}
             {result.triangleCount === 0 && (
@@ -336,13 +389,13 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
 
             {/* Vertex A */}
             <circle cx={Ax} cy={Ay} r="5" fill="var(--color-zenith-blue)" />
-            <text x={Ax - 16} y={Ay + 5} fill="var(--color-ink-deep)" fontWeight="800" fontSize="13">
+            <text x={Ax - 20} y={Ay - 6} fill="var(--color-ink-deep)" fontWeight="800" fontSize="13">
               A
             </text>
 
             {/* Vertex C */}
             <circle cx={Cx} cy={Cy} r="6" fill="var(--color-side-hyp)" />
-            <text x={Cx - 4} y={Cy - 10} fill="var(--color-ink-deep)" fontWeight="800" fontSize="14">
+            <text x={Cx} y={Cy - 12} textAnchor="middle" fill="var(--color-ink-deep)" fontWeight="800" fontSize="14">
               C
             </text>
 
@@ -351,8 +404,9 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
               <>
                 <circle cx={xIntersect1} cy={Ay} r="5.5" fill="var(--color-side-opp)" />
                 <text
-                  x={xIntersect1 - 5}
-                  y={Ay + 18}
+                  x={xIntersect1}
+                  y={Ay + 20}
+                  textAnchor="middle"
                   fill="var(--color-side-opp)"
                   fontWeight="800"
                   fontSize="13"
@@ -367,8 +421,9 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
               <>
                 <circle cx={xIntersect2} cy={Ay} r="5.5" fill="var(--color-side-adj)" />
                 <text
-                  x={xIntersect2 - 5}
-                  y={Ay + 18}
+                  x={xIntersect2}
+                  y={Ay + 20}
+                  textAnchor="middle"
                   fill="var(--color-side-adj)"
                   fontWeight="800"
                   fontSize="13"
@@ -378,10 +433,27 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
               </>
             )}
 
+            {/* Discarded exterior root marker when a >= b */}
+            {sideA >= sideB && hasIntersections && (
+              <>
+                <circle cx={xIntersect2} cy={Ay} r="4" fill="none" stroke="var(--text-muted)" strokeDasharray="2 2" />
+                <text
+                  x={xIntersect2}
+                  y={Ay + 18}
+                  textAnchor="middle"
+                  fill="var(--text-muted)"
+                  fontWeight="600"
+                  fontSize="10"
+                >
+                  Behind A (exterior)
+                </text>
+              </>
+            )}
+
             {/* Drag Handle Label Hint */}
             <text
-              x="20"
-              y="22"
+              x="16"
+              y="20"
               fill="var(--text-muted)"
               fontSize="11"
               fontWeight="600"
@@ -395,7 +467,7 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {/* Quick Scenario Preset Buttons */}
           <div>
-            <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '5px' }}>
+            <div style={{ fontSize: '0.76rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '4px' }}>
               QUICK EXPERIMENT PRESETS:
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
@@ -403,8 +475,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
                 type="button"
                 className="trig-btn trig-btn-secondary"
                 style={{
-                  padding: '5px 8px',
-                  fontSize: '0.8rem',
+                  padding: '4px 6px',
+                  fontSize: '0.78rem',
                   background: sideA === 4 ? 'var(--color-coral-light)' : undefined,
                   borderColor: sideA === 4 ? 'var(--color-coral-primary)' : undefined,
                   fontWeight: sideA === 4 ? 800 : 600,
@@ -417,8 +489,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
                 type="button"
                 className="trig-btn trig-btn-secondary"
                 style={{
-                  padding: '5px 8px',
-                  fontSize: '0.8rem',
+                  padding: '4px 6px',
+                  fontSize: '0.78rem',
                   background: sideA === 5 ? 'var(--color-mint-light)' : undefined,
                   borderColor: sideA === 5 ? 'var(--color-mint-primary)' : undefined,
                   fontWeight: sideA === 5 ? 800 : 600,
@@ -431,8 +503,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
                 type="button"
                 className="trig-btn trig-btn-secondary"
                 style={{
-                  padding: '5px 8px',
-                  fontSize: '0.8rem',
+                  padding: '4px 6px',
+                  fontSize: '0.78rem',
                   background: sideA === 7 ? 'var(--color-sunlight-glow)' : undefined,
                   borderColor: sideA === 7 ? 'var(--color-sunlight)' : undefined,
                   fontWeight: sideA === 7 ? 800 : 600,
@@ -445,8 +517,8 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
                 type="button"
                 className="trig-btn trig-btn-secondary"
                 style={{
-                  padding: '5px 8px',
-                  fontSize: '0.8rem',
+                  padding: '4px 6px',
+                  fontSize: '0.78rem',
                   background: sideA === 11 ? 'var(--color-mint-light)' : undefined,
                   borderColor: sideA === 11 ? 'var(--color-mint-primary)' : undefined,
                   fontWeight: sideA === 11 ? 800 : 600,
@@ -462,24 +534,24 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
           <div
             style={{
               background: 'var(--surface-inset)',
-              padding: '11px 14px',
+              padding: '8px 12px',
               borderRadius: 'var(--radius-sm)',
               border: '1px solid var(--card-border)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.84rem', marginBottom: '3px' }}>
               <span>
                 Swinging Side length <strong>a = {sideA}</strong>
               </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 h = {altitudeH.toFixed(1)}, b = {sideB}
               </span>
             </div>
             <input
               type="range"
               min="3.5"
-              max="13"
-              step="0.2"
+              max="12.0"
+              step="0.1"
               value={sideA}
               onChange={e => {
                 setSideA(Number(e.target.value));
@@ -490,9 +562,9 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
               style={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                fontSize: '0.72rem',
+                fontSize: '0.7rem',
                 color: 'var(--text-muted)',
-                marginTop: '3px',
+                marginTop: '2px',
               }}
             >
               <span>a &lt; 5.0 (0 Δ)</span>
@@ -505,9 +577,9 @@ export const SwingTriangle: React.FC<SwingTriangleProps> = ({
           {/* Real-Time Mathematical Insight Box */}
           <div
             style={{
-              fontSize: '0.85rem',
-              lineHeight: 1.4,
-              padding: '10px 14px',
+              fontSize: '0.82rem',
+              lineHeight: 1.35,
+              padding: '8px 12px',
               borderRadius: 'var(--radius-sm)',
               background:
                 result.triangleCount === 2
