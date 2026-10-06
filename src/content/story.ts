@@ -13,6 +13,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'The Meridian Express rolls to a stop before the Great Pyramid of Giza. Nobody can climb this ancient wonder with a measuring tape. Apprentice surveyors, Theo has your first mission!',
     spokenText: 'The Meridian Express rolls to a stop before the Great Pyramid of Giza. Nobody can climb this ancient wonder with a measuring tape. Apprentice surveyors, Theo has your first mission.',
     image: '/story/story-1-1.jpg',
+    audio: '/audio/story-1-1.mp3',
   },
   {
     id: 'story-1-2',
@@ -24,6 +25,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'As ancient stories tell, the philosopher Thales planted his staff in the desert sand. He did not climb. He waited until his own shadow was exactly as long as his staff.',
     spokenText: 'As ancient stories tell, the philosopher Thales planted his staff in the desert sand. He did not climb. He waited until his own shadow was exactly as long as his staff.',
     image: '/story/story-1-2.jpg',
+    audio: '/audio/story-1-2.mp3',
   },
   {
     id: 'story-1-3',
@@ -35,6 +37,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Later in the afternoon, the sun dips. Kofi measures a 2-meter rod casting a 3.5-meter shadow. Ira notices: the triangle made by the staff has the exact same shape as the giant triangle made by the pyramid!',
     spokenText: 'Later in the afternoon, the sun dips. Kofi measures a two-meter rod casting a three-point-five meter shadow. Ira notices: the triangle made by the staff has the exact same shape as the giant triangle made by the pyramid.',
     image: '/story/story-1-3.jpg',
+    audio: '/audio/story-1-3.mp3',
   },
   {
     id: 'story-1-4',
@@ -46,6 +49,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'In Alexandria, Eratosthenes realized that shadows cast in two distant cities revealed the curvature of the world. With simple angles and footsteps, humanity measured the circumference of the Earth.',
     spokenText: 'In Alexandria, Eratosthenes realized that shadows cast in two distant cities revealed the curvature of the world. With simple angles and footsteps, humanity measured the circumference of the Earth.',
     image: '/story/story-1-4.jpg',
+    audio: '/audio/story-1-4.mp3',
   },
   {
     id: 'story-1-5',
@@ -57,6 +61,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Aboard the train, Mei names the three sacred ratios: opposite over hypotenuse, adjacent over hypotenuse, and opposite over adjacent. Theo stamps them with their true names: Sine, Cosine, and Tangent.',
     spokenText: 'Aboard the train, Mei names the three sacred ratios: opposite over hypotenuse, adjacent over hypotenuse, and opposite over adjacent. Theo stamps them with their true names: Sine, Cosine, and Tangent.',
     image: '/story/story-1-5.jpg',
+    audio: '/audio/story-1-5.mp3',
   },
   {
     id: 'story-1-6',
@@ -68,6 +73,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Theo unlatches the brass clinometer. "Give me an angle and a single baseline distance, and together we will measure anything tall."',
     spokenText: 'Theo unlatches the brass clinometer. Give me an angle and a single baseline distance, and together we will measure anything tall.',
     image: '/story/story-1-6.jpg',
+    audio: '/audio/story-1-6.mp3',
   },
 
   // --- LEVEL 2: CIRCLE CARTOGRAPHERS ---
@@ -81,6 +87,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'In ancient India, the astronomer Aryabhata mapped the heavens using bowstrings called jya. Instead of flat triangles, he placed angles inside circles.',
     spokenText: 'In ancient India, the astronomer Aryabhata mapped the heavens using bowstrings called jya. Instead of flat triangles, he placed angles inside circles.',
     image: '/story/story-2-1.jpg',
+    audio: '/audio/story-2-1.mp3',
   },
   {
     id: 'story-2-2',
@@ -92,6 +99,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Calculating ratios for different planetary spheres was tedious. Aryabhata simplified everything by setting the circle’s radius to exactly one. The Unit Circle was born.',
     spokenText: 'Calculating ratios for different planetary spheres was tedious. Aryabhata simplified everything by setting the circles radius to exactly one. The Unit Circle was born.',
     image: '/story/story-2-2.jpg',
+    audio: '/audio/story-2-2.mp3',
   },
   {
     id: 'story-2-3',
@@ -103,6 +111,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Ira watches the rotating beam sweep past ninety degrees. A right triangle cannot have an angle of 120°, but a circle can! The horizontal position is cosine; the vertical position is sine.',
     spokenText: 'Ira watches the rotating beam sweep past ninety degrees. A right triangle cannot have an angle of one hundred and twenty degrees, but a circle can! The horizontal position is cosine; the vertical position is sine.',
     image: '/story/story-2-3.jpg',
+    audio: '/audio/story-2-3.mp3',
   },
   {
     id: 'story-2-4',
@@ -114,6 +123,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Mateo traces the word’s thousand-year journey. The Sanskrit word jya traveled to Arabic as jiba, was translated into Latin as sinus meaning a fold or bay, and finally became our English word: Sine.',
     spokenText: 'Mateo traces the words thousand-year journey. The Sanskrit word jya traveled to Arabic as jiba, was translated into Latin as sinus meaning a fold or bay, and finally became our English word: Sine.',
     image: '/story/story-2-4.jpg',
+    audio: '/audio/story-2-4.mp3',
   },
   {
     id: 'story-2-5',
@@ -125,6 +135,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Degrees are arbitrary human divisions. Kofi wraps the circle’s own radius along its curved rim. Walking exactly one radius marks one radian. Walking π radians turns a perfect half-circle.',
     spokenText: 'Degrees are arbitrary human divisions. Kofi wraps the circles own radius along its curved rim. Walking exactly one radius marks one radian. Walking pi radians turns a perfect half-circle.',
     image: '/story/story-2-5.jpg',
+    audio: '/audio/story-2-5.mp3',
   },
   {
     id: 'story-2-6',
@@ -136,6 +147,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Theo links the unit circle directly to Pythagoras. Because the hypotenuse is always one, sine squared plus cosine squared must always equal one. We are ready to map the full circle!',
     spokenText: 'Theo links the unit circle directly to Pythagoras. Because the hypotenuse is always one, sine squared plus cosine squared must always equal one. We are ready to map the full circle!',
     image: '/story/story-2-6.jpg',
+    audio: '/audio/story-2-6.mp3',
   },
 
   // --- LEVEL 3: SKY ENGINEERS ---
@@ -149,6 +161,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'At the Kerala school of mathematics, Mādhava discovered that sine and cosine could be computed to infinite decimal precision using infinite series, centuries before European calculus.',
     spokenText: 'At the Kerala school of mathematics, Mādhava discovered that sine and cosine could be computed to infinite decimal precision using infinite series, centuries before European calculus.',
     image: '/story/story-3-1.jpg',
+    audio: '/audio/story-3-1.mp3',
   },
   {
     id: 'story-3-2',
@@ -160,6 +173,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'A ship navigates through dense fog between two distant lighthouses. The triangle formed with the coastline has no right angle. SOH-CAH-TOA alone cannot save them.',
     spokenText: 'A ship navigates through dense fog between two distant lighthouses. The triangle formed with the coastline has no right angle. SOH-CAH-TOA alone cannot save them.',
     image: '/story/story-3-2.svg',
+    audio: '/audio/story-3-2.mp3',
   },
   {
     id: 'story-3-3',
@@ -171,6 +185,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Kofi drops a vertical altitude down the center. By sharing a common height between two right triangles, the Law of Sines is revealed: every side divided by the sine of its opposite angle is perfectly equal.',
     spokenText: 'Kofi drops a vertical altitude down the center. By sharing a common height between two right triangles, the Law of Sines is revealed: every side divided by the sine of its opposite angle is perfectly equal.',
     image: '/story/story-3-3.svg',
+    audio: '/audio/story-3-3.mp3',
   },
   {
     id: 'story-3-4',
@@ -182,6 +197,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'When the angle between two known sides is not ninety degrees, Pythagoras needs an adjustment. The Law of Cosines applies a smooth correction term, handling any triangle in the universe.',
     spokenText: 'When the angle between two known sides is not ninety degrees, Pythagoras needs an adjustment. The Law of Cosines applies a smooth correction term, handling any triangle in the universe.',
     image: '/story/story-3-4.svg',
+    audio: '/audio/story-3-4.mp3',
   },
   {
     id: 'story-3-5',
@@ -193,6 +209,7 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Mei blends musical chords on an audio synthesizer. Combining two pure sine waves creates complex harmonics, governed by the compound angle formulas that power wireless communication.',
     spokenText: 'Mei blends musical chords on an audio synthesizer. Combining two pure sine waves creates complex harmonics, governed by the compound angle formulas that power wireless communication.',
     image: '/story/story-3-5.svg',
+    audio: '/audio/story-3-5.mp3',
   },
   {
     id: 'story-3-6',
@@ -204,5 +221,6 @@ export const STORY_PANELS: StoryPanel[] = [
     displayText: 'Theo turns to you with his telescope gleaming: "You have mastered shadows and conquered the unit circle. Now, prove your identities and build the world. Welcome, Sky Engineer!"',
     spokenText: 'Theo turns to you with his telescope gleaming: You have mastered shadows and conquered the unit circle. Now, prove your identities and build the world. Welcome, Sky Engineer!',
     image: '/story/story-3-6.svg',
+    audio: '/audio/story-3-6.mp3',
   },
 ];

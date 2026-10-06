@@ -37,6 +37,7 @@ export interface StoryPanel {
   displayText: string;
   spokenText: string;
   image?: string;
+  audio?: string;
 }
 
 export interface StationTestOption {

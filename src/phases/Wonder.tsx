@@ -1,7 +1,8 @@
 // src/phases/Wonder.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../app/state/AppContext';
 import { Theo } from '../components/mascot/Theo';
+import { sound } from '../app/audio';
 
 export const Wonder: React.FC = () => {
   const { state, dispatch } = useApp();
@@ -19,6 +20,31 @@ export const Wonder: React.FC = () => {
   // Level 3 Wonder State: Sound Cancellation Phase
   const [speakerPhase, setSpeakerPhase] = useState(0);
   const isCanceled = Math.abs(speakerPhase - 180) <= 5;
+
+  // Voice narration state
+  const [isNarrating, setIsNarrating] = useState(false);
+
+  useEffect(() => {
+    sound.stopAudio();
+    setIsNarrating(false);
+    return () => {
+      sound.stopAudio();
+    };
+  }, [level]);
+
+  const toggleWonderAudio = (lvl: number) => {
+    if (isNarrating) {
+      sound.stopAudio();
+      setIsNarrating(false);
+      return;
+    }
+    setIsNarrating(true);
+    sound.playFile(
+      `/audio/wonder-level-${lvl}.mp3`,
+      () => setIsNarrating(false),
+      () => setIsNarrating(false)
+    );
+  };
 
   const handleL1ElevChange = (val: number) => {
     setSunElev(val);
@@ -52,8 +78,26 @@ export const Wonder: React.FC = () => {
         <div className="trig-card" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '20px' }}>
             <Theo mood={l1Discovered ? 'celebrating' : 'curious'} size={110} />
-            <div>
-              <span className="side-pill side-pill-hyp" style={{ marginBottom: '6px' }}>Level 1 Wonder Hook</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <span className="side-pill side-pill-hyp">Level 1 Wonder Hook</span>
+                <button
+                  type="button"
+                  className="trig-btn trig-btn-secondary"
+                  style={{
+                    padding: '4px 12px',
+                    fontSize: '0.8rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: isNarrating ? 'var(--brand-coral-primary)' : 'var(--surface-card)',
+                    color: isNarrating ? '#ffffff' : 'var(--text-main)',
+                    borderColor: isNarrating ? 'var(--brand-coral-dark)' : 'var(--card-border)',
+                  }}
+                  onClick={() => toggleWonderAudio(1)}
+                  title="Listen to Rachel's narration"
+                >
+                  {isNarrating ? '⏹ Stop' : '🔊 Listen (Voice)'}
+                </button>
+              </div>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0 }}>
                 The Giant You Can't Climb
               </h2>
@@ -175,8 +219,26 @@ export const Wonder: React.FC = () => {
         <div className="trig-card" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '20px' }}>
             <Theo mood="curious" size={110} />
-            <div>
-              <span className="side-pill side-pill-adj" style={{ marginBottom: '6px' }}>Level 2 Wonder Hook</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <span className="side-pill side-pill-adj">Level 2 Wonder Hook</span>
+                <button
+                  type="button"
+                  className="trig-btn trig-btn-secondary"
+                  style={{
+                    padding: '4px 12px',
+                    fontSize: '0.8rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: isNarrating ? 'var(--brand-coral-primary)' : 'var(--surface-card)',
+                    color: isNarrating ? '#ffffff' : 'var(--text-main)',
+                    borderColor: isNarrating ? 'var(--brand-coral-dark)' : 'var(--card-border)',
+                  }}
+                  onClick={() => toggleWonderAudio(2)}
+                  title="Listen to Rachel's narration"
+                >
+                  {isNarrating ? '⏹ Stop' : '🔊 Listen (Voice)'}
+                </button>
+              </div>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0 }}>
                 The Wheel That Draws a Wave
               </h2>
@@ -268,8 +330,26 @@ export const Wonder: React.FC = () => {
         <div className="trig-card" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '20px' }}>
             <Theo mood={isCanceled ? 'celebrating' : 'thinking'} size={110} />
-            <div>
-              <span className="side-pill side-pill-hyp" style={{ marginBottom: '6px' }}>Level 3 Wonder Hook</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                <span className="side-pill side-pill-hyp">Level 3 Wonder Hook</span>
+                <button
+                  type="button"
+                  className="trig-btn trig-btn-secondary"
+                  style={{
+                    padding: '4px 12px',
+                    fontSize: '0.8rem',
+                    borderRadius: 'var(--radius-full)',
+                    background: isNarrating ? 'var(--brand-coral-primary)' : 'var(--surface-card)',
+                    color: isNarrating ? '#ffffff' : 'var(--text-main)',
+                    borderColor: isNarrating ? 'var(--brand-coral-dark)' : 'var(--card-border)',
+                  }}
+                  onClick={() => toggleWonderAudio(3)}
+                  title="Listen to Rachel's narration"
+                >
+                  {isNarrating ? '⏹ Stop' : '🔊 Listen (Voice)'}
+                </button>
+              </div>
               <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', margin: 0 }}>
                 Can Two Sounds Make Silence?
               </h2>

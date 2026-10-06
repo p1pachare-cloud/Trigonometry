@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '../app/state/AppContext';
 import { STORY_PANELS } from '../content/story';
 import { Theo } from '../components/mascot/Theo';
+import { sound } from '../app/audio';
 
 export const Story: React.FC = () => {
   const { state, dispatch } = useApp();
@@ -14,12 +15,19 @@ export const Story: React.FC = () => {
   const currentPanel = panels[activePanelIdx] || panels[0];
   const isLastPanel = activePanelIdx === panels.length - 1;
 
-  // Stop speech when panel changes
+  // Stop speech/audio when panel changes or unmounts
   useEffect(() => {
-    if ('speechSynthesis' in window) {
+    sound.stopAudio();
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
-      setIsSpeaking(false);
     }
+    setIsSpeaking(false);
+    return () => {
+      sound.stopAudio();
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
   }, [activePanelIdx, level]);
 
   const handleNext = () => {
@@ -37,19 +45,44 @@ export const Story: React.FC = () => {
   };
 
   const handleToggleSpeech = () => {
-    if (!('speechSynthesis' in window)) return;
     if (isSpeaking) {
-      window.speechSynthesis.cancel();
+      sound.stopAudio();
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
       setIsSpeaking(false);
       return;
     }
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(currentPanel.spokenText);
-    utterance.rate = 0.95;
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
+
     setIsSpeaking(true);
-    window.speechSynthesis.speak(utterance);
+
+    // 1. Try playing offline studio-quality MP3 narration
+    if (currentPanel.audio) {
+      const audio = sound.playFile(
+        currentPanel.audio,
+        () => setIsSpeaking(false),
+        () => {
+          // Fallback to speech synthesis if audio file cannot be played
+          fallbackSpeech();
+        }
+      );
+      if (audio) return;
+    }
+
+    fallbackSpeech();
+  };
+
+  const fallbackSpeech = () => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(currentPanel.spokenText);
+      utterance.rate = 0.95;
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      setIsSpeaking(false);
+    }
   };
 
   return (
@@ -237,29 +270,29 @@ export const Story: React.FC = () => {
                 "{currentPanel.displayText}"
               </div>
 
-              {/* Narration Listen Button */}
-              {'speechSynthesis' in window && (
-                <button
-                  type="button"
-                  className="trig-btn trig-btn-secondary"
-                  style={{
-                    flexShrink: 0,
-                    padding: '6px 12px',
-                    fontSize: '0.8rem',
-                    borderRadius: 'var(--radius-full)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    background: isSpeaking ? 'var(--brand-coral-primary)' : 'var(--surface-card)',
-                    color: isSpeaking ? '#ffffff' : 'var(--text-main)',
-                    borderColor: isSpeaking ? 'var(--brand-coral-dark)' : 'var(--card-border)',
-                  }}
-                  onClick={handleToggleSpeech}
-                  title="Listen to historical narration"
-                >
-                  <span>{isSpeaking ? '⏹ Stop' : '🔊 Listen'}</span>
-                </button>
-              )}
+              {/* Narration Listen Button (Offline MP3 Voice) */}
+              <button
+                type="button"
+                className="trig-btn trig-btn-secondary"
+                style={{
+                  flexShrink: 0,
+                  padding: '6px 14px',
+                  fontSize: '0.82rem',
+                  borderRadius: 'var(--radius-full)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: isSpeaking ? 'var(--brand-coral-primary)' : 'var(--surface-card)',
+                  color: isSpeaking ? '#ffffff' : 'var(--text-main)',
+                  borderColor: isSpeaking ? 'var(--brand-coral-dark)' : 'var(--card-border)',
+                  boxShadow: isSpeaking ? '0 0 12px rgba(244, 63, 94, 0.4)' : 'none',
+                  transition: 'all 0.2s ease',
+                }}
+                onClick={handleToggleSpeech}
+                title="Listen to Rachel's educational voice narration"
+              >
+                <span>{isSpeaking ? '⏹ Stop' : '🔊 Listen (Voice)'}</span>
+              </button>
             </div>
 
             {state.settings.captions && (
